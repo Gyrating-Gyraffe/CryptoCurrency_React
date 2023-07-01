@@ -1,0 +1,26 @@
+.Layout {
+    height: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 15% 80% 5%;
+    grid-template-columns: repeat(12, 1fr);
+    color: black;
+}
+
+.Layout > header, .Layout > footer {
+    grid-column: span 12;
+}
+
+.Layout > main {
+    grid-column: span 10;
+    overflow: auto;
+}
+
+.Layout > aside {
+    grid-column: span 1;
+}
+
+.Layout, .Layout > * {
+    border: 1px solid;
+}
+

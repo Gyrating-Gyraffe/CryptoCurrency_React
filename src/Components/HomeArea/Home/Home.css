@@ -1,0 +1,11 @@
+.Home {
+	height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.CardContainer {
+    flex-basis: 33%;
+    border: black 1px solid;
+}

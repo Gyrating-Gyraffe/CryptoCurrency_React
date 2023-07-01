@@ -1,0 +1,48 @@
+.CoinCard {
+    background-image: url("../../../Assets/Images/cartridge_test.jpeg");
+    background-size: contain;
+    background-repeat: no-repeat;
+
+	border: red 2px solid;
+    width: 250px;
+    height: 280px;
+    margin: auto;
+    padding: 25px 0 0 0;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.CoinCard * {
+    border: green 1px solid;
+    margin: 0;
+}
+
+.form-switch {
+    /* flex-basis: 10%; */
+    order: 4;
+    margin-top: 10%;
+}
+
+.card-title {
+    flex-basis: 25%;
+    margin-bottom: 5%;
+
+    font-size: 35px;
+}
+
+.card-text {
+    flex-basis: 70%;
+}
+
+.more-info {
+    flex-basis: 15%;
+    
+
+    background-color: transparent;
+    word-spacing: 45px;
+
+    font-weight: 600;
+}
