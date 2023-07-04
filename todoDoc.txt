@@ -1,1 +1,2 @@
-1. In Home.tsx -> Lacking coin type definition. Currently set to any.
+1. In Services/ChartService add typing to the coin apiData received for the chart.
+2. Continue working on ChartService logic and design.

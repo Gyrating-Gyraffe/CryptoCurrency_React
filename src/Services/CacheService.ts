@@ -15,9 +15,9 @@ class CacheService {
         const obj = { timestamp: new Date(), content: value };
         localStorage.setItem(key, JSON.stringify(obj));
     }
-    // Validates data (for cache retreival)
+    // Validates data (for cache retrieval)
     isValid(data: any): boolean {
-        const timeout = 120000; // Timeout in miliseconds
+        const timeout = 120000; // Timeout in milliseconds
         // Timestamp validation
         if(data.timestamp) return !((new Date().getTime() - new Date(data.timestamp).getTime()) > timeout);
         return false;
