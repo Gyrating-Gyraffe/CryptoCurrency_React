@@ -1,14 +1,15 @@
-import Main from "../Main/Main";
+import Nav from "../../NavArea/Nav/Nav";
+import Routing from "../Routing/Routing";
 import "./Layout.css";
 
 function Layout(): JSX.Element {
     console.log("Layout called");
     return (
         <div className="Layout">
-			<header>HEADER</header>
+			<header><Nav /></header>
             <aside>ASIDE L</aside>
             <main>
-                <Main />
+                <Routing />
             </main> 
             <aside>ASIDE R</aside>
             <footer>FOOTER</footer>

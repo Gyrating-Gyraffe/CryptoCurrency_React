@@ -1,4 +1,8 @@
 .CoinCard {
+    overflow: hidden;
+}
+
+.CartridgeFront, .CartridgeRear {
     background-image: url("../../../Assets/Images/cartridge_test.jpeg");
     background-size: contain;
     background-repeat: no-repeat;

@@ -17,11 +17,11 @@ class CacheService {
     }
     // Validates data (for cache retreival)
     isValid(data: any): boolean {
-        const timeout = 12000; // Timeout in miliseconds
+        const timeout = 120000; // Timeout in miliseconds
         // Timestamp validation
         if(data.timestamp) return !((new Date().getTime() - new Date(data.timestamp).getTime()) > timeout);
         return false;
     }
 }
 
-export default CacheService;
+export const cacheService = new CacheService();;
