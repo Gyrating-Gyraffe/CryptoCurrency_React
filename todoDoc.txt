@@ -1,2 +1,3 @@
 1. In Services/ChartService add typing to the coin apiData received for the chart.
 2. Continue working on ChartService logic and design.
+3. Add strong typing to ApiService promise return type.

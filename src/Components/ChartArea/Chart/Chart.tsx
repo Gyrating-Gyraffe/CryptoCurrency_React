@@ -1,42 +1,48 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import CanvasJSReact from '@canvasjs/react-charts';
+import { chartService } from '../../../Services/ChartService';
 
 // const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function Chart(): JSX.Element {
-  const chartRef = useRef<CanvasJSReact.CanvasJSChart | null>(null);
+    const chartRef = useRef<CanvasJSReact.CanvasJSChart | null>(null);
+    let [options, setOptions] = useState({});
+    const [chartKey, setChartKey] = useState(0); // Add chartKey state
 
-  const toggleDataSeries = (e: any) => {
-    if (typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible) {
-      e.dataSeries.visible = false;
-    } else {
-      e.dataSeries.visible = true;
-    }
-    if (chartRef.current) {
-      chartRef.current.render();
-    }
-  };
+    useEffect(() => {
+      setOptions(chartService.Initialize(["MKR", "ETH", "BTC", "BNB", "XMR"], ["USD"]));
+    }, []);
+
+
+    useEffect(() => {
+      if (chartRef.current) {   
+        const chartUpdateInterval = setInterval(() => {
+            const update = async () => {
+            setOptions((await chartService.Update()).GetOptions());
+            setChartKey((prevKey) => prevKey + 1);
+          }
+          update();
+          console.log("OPTIONS: ", options);
+          chartRef?.current?.render();
+        }, 2000);
   
-  useEffect(() => {
-    if (chartRef.current) {
-      chartRef.current.render();
-    }
-  }, []);
-
-  const options = {
-    // Options object properties
-  };
+        return () => {
+          clearInterval(chartUpdateInterval);
+        };
+      }
+    }, [options]);
 
   return (
     <div className="Chart">
       <CanvasJSChart
+        key={chartKey}
         options={options}
         ref={(ref) => {
-            chartRef.current = ref as CanvasJSReact.CanvasJSChart;
-          }}
-        /* You can get reference to the chart instance as shown above using onRef.
-           This allows you to access all chart properties and methods */
+          chartRef.current = ref as CanvasJSReact.CanvasJSChart;
+        }}
+      /* You can get reference to the chart instance as shown above using onRef.
+         This allows you to access all chart properties and methods */
       />
     </div>
   );

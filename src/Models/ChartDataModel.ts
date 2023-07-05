@@ -10,8 +10,10 @@ class ChartDataModel {
         public name: string = "Units Sold",
         public showInLegend: boolean = true,
         public xValueFormatString: string = "MMM YYYY",
-        public yValueFormatString: string = "#,##0 Units",
-        public dataPoints: Point[] = []
+        public yValueFormatString: string = "#,##0 $",
+        public axisYIndex: number = 0,
+        public dataPoints: Point[] = [],
+        public color?: string
         ){};
 }
 
