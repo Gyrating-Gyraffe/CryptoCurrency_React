@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-import CoinModel from "../../../Models/CoinModel";
 import "./CoinCard.css";
+import { useState, useEffect, ChangeEvent } from "react";
+import CoinModel from "../../../Models/CoinModel";
 import CoinInfoModel from "../../../Models/CoinInfoModel";
+import { chartService } from "../../../Services/ChartService";
 import { dataService } from "../../../Services/DataService";
 import { appConfig } from "../../../Utils/AppConfig";
+import { logger } from "../../../Utils/Logger";
 
 type CoinCardProps = {
     coin: CoinModel;
@@ -19,6 +21,15 @@ function CoinCard(props: CoinCardProps): JSX.Element {
     const [coinInfo, setCoinInfo] = useState<CoinInfoModel>();
 
     const [showInfo, setShowInfo] = useState<boolean>(false);
+    const [liveDataExists, setLiveDataExists] = useState<boolean>(false);
+
+    // Check if live data exists for this coin in CryptoCompare
+    useEffect(() => {
+        (async () => {
+            if(props.coin.symbol)
+                setLiveDataExists(await chartService.checkLiveData(props.coin.symbol));
+        })();
+    })
 
     useEffect(() => {
         if (showInfo) {
@@ -27,16 +38,22 @@ function CoinCard(props: CoinCardProps): JSX.Element {
     }, [showInfo]);
 
     const fetchData = async () => {
-        console.log("fetching more info...");
+        logger.log("fetching more info...", "CoinCard Logs");
         dataService.requestData(appConfig.coinsAPIUrl + props.coin.id)
-            .then(info => setCoinInfo(info)
-            )
-            .catch(err => console.error("Unable to display coins: \n" + err.message));;
+            .then(info => setCoinInfo(info))
+            .catch(err => logger.error("Unable to display coins: \n" + err.message, "CoinCard Errors"));
     }
 
+    const toggleSelect = (event: ChangeEvent<HTMLInputElement>) => {
+        const selected = event.target.checked;
+        // LOG
+        logger.log(`Coin <${props.coin.symbol}> ${selected ? "Selected" : "Deselected"}`, "CoinCard Logs");
+        if(props.coin.symbol)
+            selected ? chartService.addCoin(props.coin.symbol) : chartService.removeCoin(props.coin.symbol);
+    }
 
-    function ToggleInfo() {
-        setShowInfo(!showInfo);
+    function toggleInfo() {
+        setShowInfo(current => !current);
     }
 
     return (
@@ -45,12 +62,12 @@ function CoinCard(props: CoinCardProps): JSX.Element {
             
             && <div className="CartridgeFront">
                 <div className="form-check form-switch">
-                    <input className="form-check-input coin-select" type="checkbox" role="switch" id={coinSelectID} />
+                    {liveDataExists && <input className="form-check-input coin-select" type="checkbox" role="switch" id={coinSelectID} onChange={toggleSelect} />}
                 </div>
                 <h5 className="card-title">{props.coin.symbol}</h5>
                 <p className="card-text">{props.coin.name}</p>
 
-                <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={ToggleInfo}>
+                <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
                     More Info
                 </button>
                 {showInfo && <div>
@@ -60,15 +77,16 @@ function CoinCard(props: CoinCardProps): JSX.Element {
             
             || <div className="CartridgeRear">
                 <div className="form-check form-switch">
-                    <input className="form-check-input coin-select" type="checkbox" role="switch" id={coinSelectID} />
+                    {liveDataExists && <input className="form-check-input coin-select" type="checkbox" role="switch" id={coinSelectID} onChange={toggleSelect} />}
                 </div>
                 <h5 className="card-title">{props.coin.symbol}</h5>
                 <span className="card-text">
                     <div>EUR: {coinInfo?.market_data?.current_price?.eur}</div>
                     <div>USD: {coinInfo?.market_data?.current_price?.usd}</div>
                     <div>ILS: {coinInfo?.market_data?.current_price?.ils}</div></span>
+                <img src={coinInfo?.image?.small}></img>
 
-                <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={ToggleInfo}>
+                <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
                     Go Back
                 </button>
             </div> }

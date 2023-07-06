@@ -4,9 +4,10 @@ import CoinCard from "../../CoinsArea/CoinCard/CoinCard";
 import CoinModel from "../../../Models/CoinModel";
 import { appConfig } from "../../../Utils/AppConfig";
 import "./Home.css";
+import { LogType, logger } from "../../../Utils/Logger";
 
 function Home(): JSX.Element {
-    console.log("Home called");
+    logger.log("Home called", "Component Load Sequence");
 
     const [coinsData, setCoinsData] = useState<CoinModel[]>([]);
 
@@ -23,11 +24,14 @@ function Home(): JSX.Element {
 
     return (
         <div className="Home">
-            {coinsData.slice(0, 50).map((coin: CoinModel, index: number) => (
+            {coinsData.filter(coin => {return coin.symbol ? coin.symbol.length <= 5 : false})
+            .filter((coin, index) => {return index % Math.floor(coinsData.length / 5) === 0})
+            .map((coin: CoinModel, index: number) => (
                 <div className="CardContainer" key={index}>
                     <CoinCard key={index} coin={coin} />
                 </div>
             ))}
+            
         </div>
     );
 }

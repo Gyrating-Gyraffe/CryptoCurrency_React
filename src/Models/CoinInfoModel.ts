@@ -14,6 +14,11 @@ class CoinInfoModel {
     public name?: string;
 
     public market_data?: MarketData;
+    public image?: {
+        large: string,
+        small: string,
+        thumb: string
+    }
 }
 
 export default CoinInfoModel;

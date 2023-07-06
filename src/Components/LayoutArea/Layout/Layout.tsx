@@ -1,9 +1,10 @@
+import { logger } from "../../../Utils/Logger";
 import Nav from "../../NavArea/Nav/Nav";
 import Routing from "../Routing/Routing";
 import "./Layout.css";
 
 function Layout(): JSX.Element {
-    console.log("Layout called");
+    logger.log("Layout called", "Component Load Sequence");
     return (
         <div className="Layout">
 			<header><Nav /></header>

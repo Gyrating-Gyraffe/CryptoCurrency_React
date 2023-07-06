@@ -1,3 +1,4 @@
+import "./Chart.css";
 import { useRef, useEffect, useState } from 'react';
 import CanvasJSReact from '@canvasjs/react-charts';
 import { chartService } from '../../../Services/ChartService';
@@ -11,7 +12,7 @@ function Chart(): JSX.Element {
     const [chartKey, setChartKey] = useState(0); // Add chartKey state
 
     useEffect(() => {
-      setOptions(chartService.Initialize(["MKR", "ETH", "BTC", "BNB", "XMR"], ["USD"]));
+      setOptions(chartService.initialize());
     }, []);
 
 
@@ -19,11 +20,10 @@ function Chart(): JSX.Element {
       if (chartRef.current) {   
         const chartUpdateInterval = setInterval(() => {
             const update = async () => {
-            setOptions((await chartService.Update()).GetOptions());
+            setOptions((await chartService.update()).GetOptions());
             setChartKey((prevKey) => prevKey + 1);
           }
           update();
-          console.log("OPTIONS: ", options);
           chartRef?.current?.render();
         }, 2000);
   
