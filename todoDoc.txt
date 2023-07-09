@@ -9,3 +9,7 @@
 7. Consider adding a feature to ChartService that checks which selected coins have info and which don't. 
     And shows the ones that do while hiding the ones that don't.
 8. Add 404 Image not Found for the "more info" part of the coin.
+9. Decide whether the coin selection should be kept after exiting the Live Report page or reset. 
+    Currently on exiting the Live Report page the selection is kept in Chart Service but not on the coins' buttons.
+10. Fix a known bug: When selecting a coin for the first time an error appears: Assigning a value to an undefined
+    html attribute.

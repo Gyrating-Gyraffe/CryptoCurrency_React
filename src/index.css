@@ -7,7 +7,8 @@ html, body, #root {
 }
 
 body {
-  background-image: url("Assets/Images/minimal_bg.png");
+  /* background-image: url("Assets/Images/minimal_bg.png");
   background-size: contain;
-  background-position: fixed;
+  background-position: fixed; */
+  background-color: rgb(15, 24, 32);
 }

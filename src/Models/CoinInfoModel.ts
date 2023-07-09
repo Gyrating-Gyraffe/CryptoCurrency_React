@@ -1,7 +1,3 @@
-type MarketData = {
-    current_price: CurrentPrice;
-}
-
 type CurrentPrice = {
     eur: number;
     usd: number;
@@ -13,7 +9,9 @@ class CoinInfoModel {
     public symbol?: string;
     public name?: string;
 
-    public market_data?: MarketData;
+    public market_data?: {
+        current_price: CurrentPrice
+    };
     public image?: {
         large: string,
         small: string,

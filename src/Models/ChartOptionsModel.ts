@@ -1,4 +1,3 @@
-import Chart from "../Components/ChartArea/Chart/Chart";
 import ChartDataModel from "./ChartDataModel";
 
 // This model describes the CanvasJS chart options parameter, which is a complex object that includes
@@ -12,13 +11,15 @@ class ChartOptionsModel {
         public subtitles: { text: string }[] = [
             { text: "Click Legend to Hide or Unhide Data Series" },
         ],
-        public axisX: { title: string } = { title: "States" },
+        public axisX: { title?: string } = { title: "States" },
         public axisY: [{
             title: string;
             titleFontColor?: string;
             lineColor?: string;
             labelFontColor?: string;
             tickColor?: string;
+            minimum?: number;
+            maximum?: number;
         }] = [{ title: "USD",
             titleFontColor: "#6D78AD",
             lineColor: "#6D78AD",
@@ -30,7 +31,7 @@ class ChartOptionsModel {
             itemclick: "",
         },
         public data?: ChartDataModel[]
-    ) { }
+    ) { };
 }
 
 export default ChartOptionsModel;

@@ -1,11 +1,14 @@
-.Home {
+.CardContainer {
 	height: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
 }
 
-.CardContainer {
-    flex-basis: 33%;
-    border: black 1px solid;
+.CoinContainer {
+    margin: 0 2% 0 2%;
+    flex-basis: 15%;
+    border: red 1px solid;
+    color: black;
 }
+

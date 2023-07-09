@@ -2,12 +2,12 @@ import ChartDataModel from "../Models/ChartDataModel";
 import ChartOptionsModel from "../Models/ChartOptionsModel";
 import { apiService } from "./ApiService";
 import { appConfig } from "../Utils/AppConfig";
-import { logger, LogType } from "../Utils/Logger";
+import { logger } from "../Utils/Logger";
 
 class ChartService {
     private chartData: ChartDataModel[] = [];
     private chartOptions: ChartOptionsModel = new ChartOptionsModel();
-    
+
     private colorSet: string[] = [];
 
     private apiData: any; // ToDo: Add validation and strong typing
@@ -18,6 +18,8 @@ class ChartService {
     private coinCodesArray?: string[];
     private currencyArray?: string[];
 
+    private maxPointCount: number = 10; // Maximum allowed number of points in the chart
+
  
     /** Returns the options to be used by the chart.
      * @returns The 'options' object used by the chart to plot graphs for the coins.
@@ -27,9 +29,7 @@ class ChartService {
     } 
 
     /** Initializes the properties in ChartService and prepares the class for updating.
-     * @param coinCodesArray The codes we are going to pull data on.
-     * @param currencyArray The currencyArray for which we will check coin pricing. (For the project only the USD currency is required)
-     * @returns 
+     * @returns ChartService singleton reference (this).
      */
     public initialize(): ChartService {
         this.currencySet.add("USD");
@@ -46,11 +46,12 @@ class ChartService {
 
         // For every coin we are graphing - create a dataModel with all customization and properties, and add it to the chartData object
         for(let i = 0; i < this.coinCodesArray.length; i++) {
-            this.chartOptions.axisY.push({ title: this.coinCodesArray[i],
-                                            titleFontColor: this.colorSet[i],
-                                            lineColor: this.colorSet[i],
-                                            labelFontColor: this.colorSet[i],
-                                            tickColor: this.colorSet[i] });
+            this.chartOptions.axisY.push({ 
+                title: this.coinCodesArray[i],
+                titleFontColor: this.colorSet[i],
+                lineColor: this.colorSet[i],
+                labelFontColor: this.colorSet[i],
+                tickColor: this.colorSet[i] });
 
             let dataModel = new ChartDataModel();
             dataModel.name = this.coinCodesArray[i];
@@ -75,15 +76,16 @@ class ChartService {
             logger.log("APIDATA: ", "ChartService Logs");
             logger.log(this.apiData, "ChartService Logs");
 
+            const currency = this.currencyArray[0];
             const dateNow = new Date();
-            for(const currency in this.currencyArray) {
-                for(const code in this.coinCodesArray) {             
-                    const yVal = this.apiData[this.coinCodesArray[code]][this.currencyArray[currency]];
-                    
-                    for(let i = 0; i < this.chartData.length; i++) {
-                        if(this.chartData[i].name === this.coinCodesArray[code]) 
-                            this.chartData[i].dataPoints.push({ x: dateNow, y: yVal});
-                    }
+            for(const code in this.coinCodesArray) {             
+                const yVal = this.apiData[this.coinCodesArray[code]][currency];
+                
+                for(let i = 0; i < this.chartData.length; i++) {
+                    if(this.chartData[i].name === this.coinCodesArray[code]) 
+                    this.chartData[i].dataPoints.push({ x: dateNow, y: yVal});
+                    if(this.chartData[i].dataPoints.length > this.maxPointCount)
+                    this.chartData[i].dataPoints.shift();
                 }
             }
         }
@@ -116,12 +118,19 @@ class ChartService {
             this.apiData = await apiService.fetchJSON(appConfig.coinsRealtimeURL + 
                 `?fsyms=${code.toUpperCase()}&tsyms=USD`);
             
-            if(this.apiData[code.toUpperCase()]['USD']) return true;
+            if(this.apiData[code.toUpperCase()]["USD"]) return true;
         }
         catch(err: any) {
             logger.warn(`Coin with Symbol ${code} returns an API Error. therefore has no LIVE DATA\n` + err, "Coin Live Data Issues"); 
         }
         return false; 
+    }
+
+    public cleanUp(): void {
+        this.coinSet.clear();
+        this.currencySet.clear();
+        this.coinCodesArray = [];
+        this.currencyArray = [];
     }
 
     // Chains elements of a string array together with commas ("string1,string2,string3")
@@ -137,9 +146,9 @@ class ChartService {
     // Set up a set of colors to be used by the chart
     private setUpColorSet(): void {
         this.colorSet = [//colorSet Array
-        "#4661EE",
-        "#EC5657",
-        "#1BCDD1",
+        "#7CFF01",
+        "#FFF205",
+        "#FF1178",
         "#8FAABB",
         "#B08BEB",
         "#3EA0DD",

@@ -1,8 +1,9 @@
+import { logger } from "../../../Utils/Logger";
 import Chart from "../../ChartArea/Chart/Chart";
 import "./LiveReport.css";
 
 function LiveReport(): JSX.Element {
-    console.log("Live Report called");
+    logger.log("Live Report called", "Component Load Sequence");
     return (
         <div className="LiveReport">
 			<h2>Live Report</h2>
