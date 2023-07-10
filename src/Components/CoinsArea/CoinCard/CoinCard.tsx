@@ -6,6 +6,7 @@ import { chartService } from "../../../Services/ChartService";
 import { dataService } from "../../../Services/DataService";
 import { appConfig } from "../../../Utils/AppConfig";
 import { logger } from "../../../Utils/Logger";
+import { coinsStore } from "../../../Redux/CoinStates";
 
 type CoinCardProps = {
     coin: CoinModel;
@@ -23,13 +24,18 @@ function CoinCard(props: CoinCardProps): JSX.Element {
     const [liveDataExists, setLiveDataExists] = useState<boolean>(false);
 
     const [isSelected, setIsSelected] = useState<boolean>(!!props.coin.selected);
+    const [selectedCoinsCount, setSelectedCoinsCount] = useState<number>(0);
+    const selectButtonClasses: string = `form-check-input coin-select ${selectedCoinsCount > 5 ? "bad-color" : "good-color"}`;
+
+    console.log(selectButtonClasses);
+
 
     // Check if live data exists for this coin in CryptoCompare
     useEffect(() => {
         (async () => {
-            if(props.coin.symbol)
+            if (props.coin.symbol)
                 // setLiveDataExists(await chartService.checkLiveData(props.coin.symbol));
-                setLiveDataExists(false);
+                setLiveDataExists(true);
         })();
     })
 
@@ -52,9 +58,22 @@ function CoinCard(props: CoinCardProps): JSX.Element {
         setIsSelected(selected);
         // LOG
         logger.log(`Coin <${props.coin.symbol}> ${selected ? "Selected" : "Deselected"}`, "CoinCard Logs");
-        if(props.coin.symbol)
-            selected ? chartService.addCoin(props.coin.symbol) : chartService.removeCoin(props.coin.symbol);
+        if (props.coin.symbol) selected ? chartService.addCoin(props.coin.symbol) : chartService.removeCoin(props.coin.symbol);
     }
+
+    useEffect(() => {
+        setSelectedCoinsCount(coinsStore.getState().selectedCoinsCount);
+
+        // Subscribe to changes in the global state:
+        const unsubscribe = coinsStore.subscribe(() => {
+            // Update local state with the correct data:
+            setSelectedCoinsCount(coinsStore.getState().selectedCoinsCount);
+        });
+
+        // Calling unsubscribe when our component destroyed:
+        return () => unsubscribe();
+    }, []);
+
 
     function toggleInfo() {
         setShowInfo(current => !current);
@@ -62,38 +81,46 @@ function CoinCard(props: CoinCardProps): JSX.Element {
 
     return (
         <div className="CoinCard">
-            {!showInfo 
-            
-            && <div className="CartridgeFront">
-                <div className="form-check form-switch">
-                    {liveDataExists && <input className="form-check-input coin-select" type="checkbox" role="switch" id={coinSelectID} onChange={toggleSelect} checked={props.coin.selected}/>}
-                </div>
-                <h5 className="card-title">{props.coin.symbol}</h5>
-                <p className="card-text">{props.coin.name}</p>
+            {!showInfo
 
-                <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
-                    More Info
-                </button>
-                {showInfo && <div>
-                    
+                && <div className="CartridgeFront">
+                    <div className="form-check form-switch card-title">
+                        {liveDataExists &&
+                            <label className="switch">
+                                <input className={selectButtonClasses} type="checkbox" id={coinSelectID} onChange={toggleSelect} checked={isSelected} />
+                                <span className="slider round"><span className="slider-text card-title">{props.coin.symbol}</span></span>
+                            </label>}
+
+                    </div>
+                    <p className="card-text">{props.coin.name}</p>
+
+                    <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
+                        More Info
+                    </button>
+                    {showInfo && <div>
+
+                    </div>}
+                </div>
+
+                || <div className="CartridgeRear">
+                    <div className="form-check form-switch">
+                        {liveDataExists &&
+                            <label className="switch">
+                                <input className={selectButtonClasses} type="checkbox" id={coinSelectID} onChange={toggleSelect} checked={isSelected} />
+                                <span className="slider round"><span className="slider-text card-title">{props.coin.symbol}</span></span>
+                            </label>}
+                    </div>
+                    <span className="card-text">
+                        <div>EUR: {coinInfo?.market_data?.current_price?.eur}</div>
+                        <div>USD: {coinInfo?.market_data?.current_price?.usd}</div>
+                        <div>ILS: {coinInfo?.market_data?.current_price?.ils}</div>
+                        <img src={coinInfo?.image?.small}></img>
+                    </span>
+
+                    <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
+                        Go Back
+                    </button>
                 </div>}
-            </div> 
-            
-            || <div className="CartridgeRear">
-                <div className="form-check form-switch">
-                    {liveDataExists && <input className="form-check-input coin-select" type="checkbox" role="switch" id={coinSelectID} onChange={toggleSelect} />}
-                </div>
-                <h5 className="card-title">{props.coin.symbol}</h5>
-                <span className="card-text">
-                    <div>EUR: {coinInfo?.market_data?.current_price?.eur}</div>
-                    <div>USD: {coinInfo?.market_data?.current_price?.usd}</div>
-                    <div>ILS: {coinInfo?.market_data?.current_price?.ils}</div></span>
-                <img src={coinInfo?.image?.small}></img>
-
-                <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
-                    Go Back
-                </button>
-            </div> }
         </div>
     );
 }

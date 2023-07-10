@@ -3,6 +3,7 @@ import ChartOptionsModel from "../Models/ChartOptionsModel";
 import { apiService } from "./ApiService";
 import { appConfig } from "../Utils/AppConfig";
 import { logger } from "../Utils/Logger";
+import { CoinsAction, CoinsActionType, coinsStore } from "../Redux/CoinStates";
 
 class ChartService {
     private chartData: ChartDataModel[] = [];
@@ -76,10 +77,17 @@ class ChartService {
             logger.log("APIDATA: ", "ChartService Logs");
             logger.log(this.apiData, "ChartService Logs");
 
-            const currency = this.currencyArray[0];
+            const currency = 'USD';
             const dateNow = new Date();
-            for(const code in this.coinCodesArray) {             
-                const yVal = this.apiData[this.coinCodesArray[code]][currency];
+            for(const code in this.coinCodesArray) {   
+                let yVal = 0;
+                try {          
+                    yVal = this.apiData[this.coinCodesArray[code]][currency];
+                }
+                catch(err) {
+                    logger.error(`Coin of symbol ${this.coinCodesArray[code]} has incorrect/undefined data in CryptoCompare`, "ChartService Errors");
+                    continue;
+                }
                 
                 for(let i = 0; i < this.chartData.length; i++) {
                     if(this.chartData[i].name === this.coinCodesArray[code]) 
@@ -101,9 +109,13 @@ class ChartService {
     public addCoin(code: string) {
         this.coinSet.add(code.toUpperCase());
         logger.log(this.parseToURL(Array.from(this.coinSet.values())), "ChartService Logs");
+        const action: CoinsAction = { type: CoinsActionType.AddSelected, payload: 1 };
+        coinsStore.dispatch(action);
     }
     public removeCoin(code: string) {
         this.coinSet.delete(code.toUpperCase());
+        const action: CoinsAction = { type: CoinsActionType.RemoveSelected, payload: 1 };
+        coinsStore.dispatch(action);
     }
 
     // Sets the code and currency parameters up. Converts sets to arrays for easy iteration
@@ -131,6 +143,12 @@ class ChartService {
         this.currencySet.clear();
         this.coinCodesArray = [];
         this.currencyArray = [];
+        const action: CoinsAction = { type: CoinsActionType.ResetSelected, payload: 0 };
+        coinsStore.dispatch(action);
+    }
+
+    public getSelectedCoinsCount(): number {
+        return this.coinSet.size;
     }
 
     // Chains elements of a string array together with commas ("string1,string2,string3")

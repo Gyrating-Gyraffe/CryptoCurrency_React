@@ -13,7 +13,7 @@ function Layout(): JSX.Element {
                 <Routing />
             </main> 
             <aside>ASIDE R</aside>
-            <footer>FOOTER</footer>
+            {/* <footer>FOOTER</footer> */}
         </div>
     );
 }

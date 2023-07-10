@@ -4,11 +4,13 @@ html, body, #root {
   height: 100%;
   text-align: center;
   color: white;
+  overflow: hidden;
+
 }
 
 body {
   /* background-image: url("Assets/Images/minimal_bg.png");
   background-size: contain;
   background-position: fixed; */
-  background-color: rgb(15, 24, 32);
+  background-color: #10171f;
 }

@@ -1,5 +1,9 @@
+.Home {
+
+}
+
 .CardContainer {
-	height: 100%;
+    height: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -8,7 +12,43 @@
 .CoinContainer {
     margin: 0 2% 0 2%;
     flex-basis: 15%;
-    border: red 1px solid;
     color: black;
 }
 
+.SearchBar::placeholder {
+    color: rgb(197, 197, 197);
+}
+
+.SearchBar {
+    height: 55px;
+    width: 65%;
+
+    border-radius: 20px;
+    text-align: center;
+    font-size: 35px;
+
+    background-color: rgb(109, 109, 109);
+    color: white;
+
+    margin: 0 5% 5% 5%;
+}
+
+.TextContainer {
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: 0;
+    width: 65%;
+
+    text-align: start;
+}
+
+.HomeTitle {
+    font-size: 65px;
+    color: rgb(219, 219, 219);
+    font-weight: 200;
+}
+.HomeDescription {
+    font-size: 35px;
+    color: rgb(212, 212, 212);
+    font-weight: 200;
+}
