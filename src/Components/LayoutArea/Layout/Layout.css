@@ -12,8 +12,9 @@
 }
 
 .Layout > main {
-    grid-column: span 10;
+    grid-column: span 12;
     overflow: auto;
+    padding: 0 10% 0 10%;
 }
 
 .Layout > aside {

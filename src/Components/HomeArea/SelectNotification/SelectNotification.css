@@ -1,14 +1,14 @@
 @keyframes enter {
-    0% {top: 100vh; border-radius: 0; height: 300px}
-    100% {top: calc(90vh - 50px); border-radius: 10px; height: 120px;}
+    0% {top: 100vh; border-radius: 0px; height: 300px}
+    100% {top: calc(86vh - 50px); border-radius: 10px; height: 120px;}
 }
 /* @keyframes exit {
     0% {top: calc(90vh - 100px); border-radius: 35px; height: 100px}
     100% {top: 100vh; border-radius: 0; height: 300px;}
 } */
 @keyframes exit {
-    0% {opacity: 1; top: calc(90vh - 50px); border-radius: 10px; height: 120px;}
-    100% {opacity: 0; top: calc(90vh - 50px); border-radius: 10px; height: 120px;}
+    0% {opacity: 1; top: calc(86vh - 50px); border-radius: 10px; height: 120px;}
+    100% {opacity: 0; top: calc(86vh - 50px); border-radius: 10px; height: 120px;}
 }
 
 

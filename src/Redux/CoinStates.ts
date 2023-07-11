@@ -1,8 +1,10 @@
 import { createStore } from "redux";
+import CoinModel from "../Models/CoinModel";
 
 // 1. Global State:
 export class CoinsState {
     public selectedCoinsCount: number = 0;
+    public selectedCoinsArray: CoinModel[] = [];
 }
 
 // 2. Action Type:
@@ -27,15 +29,21 @@ export function coinsReducer(currentState = new CoinsState(), action: CoinsActio
     switch (action.type) {
 
         case CoinsActionType.AddSelected: 
-            newState.selectedCoinsCount += action.payload | 1;
+            newState.selectedCoinsCount +=  1;
+            newState.selectedCoinsArray.push(action.payload);
             break;
 
         case CoinsActionType.RemoveSelected: 
-            newState.selectedCoinsCount -= action.payload | 1;
+            newState.selectedCoinsCount -= 1;
+            const index = newState.selectedCoinsArray.indexOf(action.payload);
+            console.warn(index);
+            
+            newState.selectedCoinsArray.splice(index, 1);
             break;
 
         case CoinsActionType.ResetSelected: 
             newState.selectedCoinsCount = 0;
+            newState.selectedCoinsArray = [];
             break;
     }
 

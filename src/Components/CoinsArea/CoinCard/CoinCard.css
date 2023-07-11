@@ -49,7 +49,7 @@
 }
 
 .form-switch {
-    transition: all 0.4s linear;
+    transition: all 0.2s linear;
     flex-basis: 10%;
 }
 
@@ -129,8 +129,11 @@
 .slider:hover:before {
     animation: shake .14s ease-out alternate 2;
 }
-.slider:hover {
-    background-color: #e7e7e7;
+.slider.good-color:hover {
+    background-color: rgb(148, 176, 203);
+}
+.slider.bad-color:hover {
+    background-color: rgb(202, 146, 142);
 }
 
 input.good-color:checked+.slider {

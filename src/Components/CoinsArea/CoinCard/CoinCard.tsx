@@ -26,6 +26,7 @@ function CoinCard(props: CoinCardProps): JSX.Element {
     const [isSelected, setIsSelected] = useState<boolean>(!!props.coin.selected);
     const [selectedCoinsCount, setSelectedCoinsCount] = useState<number>(0);
     const selectButtonClasses: string = `form-check-input coin-select ${selectedCoinsCount > 5 ? "bad-color" : "good-color"}`;
+    const sliderClasses: string = `slider round ${selectedCoinsCount > 4 ? "bad-color" : "good-color"}`;
 
     console.log(selectButtonClasses);
 
@@ -58,7 +59,7 @@ function CoinCard(props: CoinCardProps): JSX.Element {
         setIsSelected(selected);
         // LOG
         logger.log(`Coin <${props.coin.symbol}> ${selected ? "Selected" : "Deselected"}`, "CoinCard Logs");
-        if (props.coin.symbol) selected ? chartService.addCoin(props.coin.symbol) : chartService.removeCoin(props.coin.symbol);
+        if (props.coin.symbol) selected ? chartService.addCoin(props.coin) : chartService.removeCoin(props.coin);
     }
 
     useEffect(() => {
@@ -88,7 +89,7 @@ function CoinCard(props: CoinCardProps): JSX.Element {
                         {liveDataExists &&
                             <label className="switch">
                                 <input className={selectButtonClasses} type="checkbox" id={coinSelectID} onChange={toggleSelect} checked={isSelected} />
-                                <span className="slider round"><span className="slider-text card-title">{props.coin.symbol}</span></span>
+                                <span className={sliderClasses}><span className="slider-text card-title">{props.coin.symbol}</span></span>
                             </label>}
 
                     </div>
@@ -107,7 +108,7 @@ function CoinCard(props: CoinCardProps): JSX.Element {
                         {liveDataExists &&
                             <label className="switch">
                                 <input className={selectButtonClasses} type="checkbox" id={coinSelectID} onChange={toggleSelect} checked={isSelected} />
-                                <span className="slider round"><span className="slider-text card-title">{props.coin.symbol}</span></span>
+                                <span className={sliderClasses}><span className="slider-text card-title">{props.coin.symbol}</span></span>
                             </label>}
                     </div>
                     <span className="card-text">

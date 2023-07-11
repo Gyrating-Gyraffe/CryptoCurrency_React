@@ -4,6 +4,7 @@ import { apiService } from "./ApiService";
 import { appConfig } from "../Utils/AppConfig";
 import { logger } from "../Utils/Logger";
 import { CoinsAction, CoinsActionType, coinsStore } from "../Redux/CoinStates";
+import CoinModel from "../Models/CoinModel";
 
 class ChartService {
     private chartData: ChartDataModel[] = [];
@@ -106,15 +107,17 @@ class ChartService {
         return this;
     }
 
-    public addCoin(code: string) {
-        this.coinSet.add(code.toUpperCase());
+    public addCoin(coin: CoinModel) {
+        if(!coin.symbol) return;
+        this.coinSet.add(coin.symbol.toUpperCase());
         logger.log(this.parseToURL(Array.from(this.coinSet.values())), "ChartService Logs");
-        const action: CoinsAction = { type: CoinsActionType.AddSelected, payload: 1 };
+        const action: CoinsAction = { type: CoinsActionType.AddSelected, payload: coin };
         coinsStore.dispatch(action);
     }
-    public removeCoin(code: string) {
-        this.coinSet.delete(code.toUpperCase());
-        const action: CoinsAction = { type: CoinsActionType.RemoveSelected, payload: 1 };
+    public removeCoin(coin: CoinModel) {
+        if(!coin.symbol) return;
+        this.coinSet.delete(coin.symbol.toUpperCase());
+        const action: CoinsAction = { type: CoinsActionType.RemoveSelected, payload: coin };
         coinsStore.dispatch(action);
     }
 

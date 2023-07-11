@@ -1,0 +1,12 @@
+.SelectedCoinsPopup {
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.CoinContainer {
+    margin: 0 2% 0 2%;
+    flex-basis: 15%;
+    color: black;
+}
