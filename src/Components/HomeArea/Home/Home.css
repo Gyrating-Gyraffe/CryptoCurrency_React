@@ -1,5 +1,12 @@
+@keyframes appear {
+    0% {scale: 1; translate: -120% 0;}
+    100% {scale: 1; translate: 0; }
+}
 .Home {
-
+    /* animation: appear 0.7s cubic-bezier(0.47, 0, 0.745, 1); */
+}
+.Home.Leave {
+    animation: appear 0.7s cubic-bezier(0.47, 0, 0.745, 1) reverse;
 }
 
 .CardContainer {
@@ -10,13 +17,22 @@
 }
 
 .CoinContainer {
-    margin: 0 2% 0 2%;
+    margin: 0 2% 2% 2% !important;
     flex-basis: 15%;
-    color: black;
+    filter: none;
+    transition: all 0.3s ease-in;
+}
+.CoinContainer:hover {
+    margin: 0 2% 2% 2% !important;
+    flex-basis: 15%;
+    filter: drop-shadow(15px 15px 1px var(--primary1000));
+    translate: -10px -5px;
+    scale: 1.05;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .SearchBar::placeholder {
-    color: rgb(197, 197, 197);
+    color: var(--primary500);
 }
 
 .SearchBar {
@@ -24,11 +40,12 @@
     width: 65%;
 
     border-radius: 20px;
+    border: 1px solid var(--secondary300);
     text-align: center;
     font-size: 35px;
 
-    background-color: rgb(109, 109, 109);
-    color: white;
+    background-color: var(--primary800);
+    color: var(--primary100);
 
     margin: 0 5% 5% 5%;
 }
@@ -44,11 +61,11 @@
 
 .HomeTitle {
     font-size: 65px;
-    color: rgb(219, 219, 219);
+    color: var(--secondary300);
     font-weight: 200;
 }
 .HomeDescription {
     font-size: 35px;
-    color: rgb(212, 212, 212);
+    color: var(--primary100);
     font-weight: 200;
 }

@@ -1,0 +1,41 @@
+.LiveCoinCard {
+    overflow: hidden;
+}
+
+.LiveCoinCard .CartridgeFront,
+.CartridgeRear {
+    background-image: url("../../../Assets/Images/cartridgeFront.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    width: 300px;
+    height: 335px;
+    margin: auto;
+    padding: 0px 0 0 0;
+
+    color: var(--primary800);
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.LiveCoinCard .CartridgeRear img {
+    margin: 0;
+}
+
+.card-title {
+    flex-basis: 15%;
+    font-size: 35px;;
+}
+
+.card-text {
+    flex-basis: 60%;
+    font-size: 30px;
+    max-width: 166px;
+    padding: 10px;
+
+    margin: 0;
+}

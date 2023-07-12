@@ -3,6 +3,7 @@ import Nav from "../../NavArea/Nav/Nav";
 import Routing from "../Routing/Routing";
 import { createContext, useEffect, useRef, useState } from "react";
 import "./Layout.css";
+import logoImage from "../../../Assets/Images/ptm_logo.png";
 
 export const ScrollContext = createContext<number>(0);
 

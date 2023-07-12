@@ -7,21 +7,48 @@
     color: black;
 }
 
-.Layout > header, .Layout > footer {
+.Layout>header,
+.Layout>footer {
     grid-column: span 12;
+    display: flex;
+    flex-flow: row nowrap;
+    background-color: var(--primary800);
+}
+.Layout > header > img {
+    margin: 0 -10% 0 5%;
 }
 
-.Layout > main {
+.Layout>main {
     grid-column: span 12;
     overflow: auto;
     padding: 0 10% 0 10%;
 }
 
-.Layout > aside {
+.Layout>aside {
     grid-column: span 1;
 }
 
-.Layout, .Layout > * {
-    border: 1px solid;
+
+
+/* SCROLLBAR CUSTOMIZATION */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;   
 }
 
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--primary900);
+    border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--secondary300);
+}
+
+/* Handle on hover */  
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary100);
+}

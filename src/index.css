@@ -1,4 +1,32 @@
 html, body, #root {
+  --primary50: #F0F4F8;
+  --primary100: #D9E2EC;
+  --primary200: #BCCCDC;
+  --primary300: #9FB3C8;
+  --primary400: #829AB1;
+  --primary500: #627D98;
+  --primary600: #486581;
+  --primary700: #334E68;
+  --primary800: #243B53;
+  --primary900: #102A43;
+  --primary1000: #121f2b;
+  --secondary100: #baf8d1;
+  --secondary200: #a3f0bf;
+  --secondary300: #70ea9c;
+  --secondary400: #42d97a;
+  --tertiary100: #f8b0d1;
+  --tertiary200: #f27ab2;
+  --tertiary300: #c3437f;
+  --tertiary400: #a92965;
+  --warn100: #e69c9c;
+  --warn200: #e08383;
+  --warn300: #cf4b4b;
+  --warn400: #983737;
+  --warn500: #8b2828;
+
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
   margin: 0;
   padding: 0;
   height: 100%;
@@ -6,11 +34,12 @@ html, body, #root {
   color: white;
   overflow: hidden;
 
+  
 }
 
 body {
   /* background-image: url("Assets/Images/minimal_bg.png");
   background-size: contain;
   background-position: fixed; */
-  background-color: #10171f;
+  background-color: var(--primary900);
 }

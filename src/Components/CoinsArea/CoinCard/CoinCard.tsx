@@ -10,6 +10,7 @@ import { coinsStore } from "../../../Redux/CoinStates";
 
 type CoinCardProps = {
     coin: CoinModel;
+    hideSwitch?: boolean
 }
 
 
@@ -98,9 +99,6 @@ function CoinCard(props: CoinCardProps): JSX.Element {
                     <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
                         More Info
                     </button>
-                    {showInfo && <div>
-
-                    </div>}
                 </div>
 
                 || <div className="CartridgeRear">
@@ -112,6 +110,7 @@ function CoinCard(props: CoinCardProps): JSX.Element {
                             </label>}
                     </div>
                     <span className="card-text">
+                        {props.coin.name}
                         <div>EUR: {coinInfo?.market_data?.current_price?.eur}</div>
                         <div>USD: {coinInfo?.market_data?.current_price?.usd}</div>
                         <div>ILS: {coinInfo?.market_data?.current_price?.ils}</div>

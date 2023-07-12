@@ -103,7 +103,6 @@ function Home(): JSX.Element {
                         .map((coin: CoinModel) => (
                             <div className="CoinContainer" key={coin.jsxKey}>
                                 <CoinCard key={coin.jsxKey} coin={coin} />
-                                {coin.jsxKey}
                             </div>
                         )) : coinsData.length > 0 && <h1>NO COINS FOUND</h1>}
             </div>            

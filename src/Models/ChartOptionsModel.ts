@@ -5,6 +5,7 @@ import ChartDataModel from "./ChartDataModel";
 class ChartOptionsModel {
     constructor(
         public theme: string = "dark1",
+        public backgroundColor?: string,
         public colorSet?: string[],
         public animationEnabled: boolean = false,
         public title: { text: string } = { text: "Real-time Coin Worth" },
