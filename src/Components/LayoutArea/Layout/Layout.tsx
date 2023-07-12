@@ -20,7 +20,7 @@ function Layout(): JSX.Element {
             const lastScrollPos: number = mainRef.current.scrollTop;
             const topScroll = 0 + scrollMargin + 600;
             const botScroll = mainRef.current.scrollHeight - scrollMargin;
-            setScrollValue(lastScrollPos < topScroll ? 1 : (lastScrollPos > botScroll ? -1 : 0));
+            setScrollValue(lastScrollPos < topScroll ? -1 : (lastScrollPos > botScroll ? 1 : 0));
         };
 
         if (mainRef.current) {

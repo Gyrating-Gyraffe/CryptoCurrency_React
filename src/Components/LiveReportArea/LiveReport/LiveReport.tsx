@@ -16,7 +16,7 @@ function LiveReport(): JSX.Element {
 			<h2>Live Report</h2>
 
             <LiveCoinCard coinNames={coinsStore.getState().selectedCoinsArray.map(coin => coin.symbol ? `-${coin.symbol}-` : "" )}/>
-
+            
             {/* <Chart /> */}
             
         </div>

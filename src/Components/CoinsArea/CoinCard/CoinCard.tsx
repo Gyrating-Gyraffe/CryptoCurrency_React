@@ -5,8 +5,8 @@ import CoinInfoModel from "../../../Models/CoinInfoModel";
 import { chartService } from "../../../Services/ChartService";
 import { dataService } from "../../../Services/DataService";
 import { appConfig } from "../../../Utils/AppConfig";
-import { logger } from "../../../Utils/Logger";
 import { coinsStore } from "../../../Redux/CoinStates";
+import { Unsubscribe } from "redux";
 
 type CoinCardProps = {
     coin: CoinModel;
@@ -14,23 +14,18 @@ type CoinCardProps = {
 }
 
 
-// Receives a coin object and builds a card for that coin
+/** Receives a coin object and builds a card for that coin */
 function CoinCard(props: CoinCardProps): JSX.Element {
-    const moreInfoID = `moreInfo_${props.coin.id}`;
-    const coinSelectID = `coinSelect_${props.coin.id}`;
-
+    // STATES
     const [coinInfo, setCoinInfo] = useState<CoinInfoModel>();
-
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const [liveDataExists, setLiveDataExists] = useState<boolean>(false);
-
     const [isSelected, setIsSelected] = useState<boolean>(!!props.coin.selected);
     const [selectedCoinsCount, setSelectedCoinsCount] = useState<number>(0);
+    
+    // Classes controlling slider/selection button styling
     const selectButtonClasses: string = `form-check-input coin-select ${selectedCoinsCount > 5 ? "bad-color" : "good-color"}`;
     const sliderClasses: string = `slider round ${selectedCoinsCount > 4 ? "bad-color" : "good-color"}`;
-
-    console.log(selectButtonClasses);
-
 
     // Check if live data exists for this coin in CryptoCompare
     useEffect(() => {
@@ -39,44 +34,44 @@ function CoinCard(props: CoinCardProps): JSX.Element {
                 // setLiveDataExists(await chartService.checkLiveData(props.coin.symbol));
                 setLiveDataExists(true);
         })();
-    })
+    }, []);
 
-    useEffect(() => {
-        if (showInfo) {
-            fetchData();
-        }
-    }, [showInfo]);
+    // EFFECTS
+    useEffect(fetchMoreInfo, [showInfo]);   // Loads additional info when "More Info" button is pressed
+    useEffect(subToSelectedCoinsCount, []); // Redux subscription
 
-    const fetchData = async () => {
-        logger.log("fetching more info...", "CoinCard Logs");
+    // METHODS
+    /** Retrives more info on the coin such as the price in USD/EUR/ILS and the Image. */
+    function fetchMoreInfo(): void {
+        if (!showInfo) return;
         dataService.requestData(appConfig.coinsAPIUrl + props.coin.id)
             .then(info => setCoinInfo(info))
-            .catch(err => logger.error("Unable to display coins: \n" + err.message, "CoinCard Errors"));
+            .catch(err => console.error("Unable to display coins: ", err.message));
     }
 
-    const toggleSelect = (event: ChangeEvent<HTMLInputElement>) => {
-        const selected = event.target.checked;
-        props.coin.selected = selected;
-        setIsSelected(selected);
-        // LOG
-        logger.log(`Coin <${props.coin.symbol}> ${selected ? "Selected" : "Deselected"}`, "CoinCard Logs");
-        if (props.coin.symbol) selected ? chartService.addCoin(props.coin) : chartService.removeCoin(props.coin);
-    }
-
-    useEffect(() => {
+    /** Subscribes to the coinsStore's global Selected Coins Count state, and updates the local state when needed. */
+    function subToSelectedCoinsCount(): Unsubscribe {
         setSelectedCoinsCount(coinsStore.getState().selectedCoinsCount);
 
-        // Subscribe to changes in the global state:
+        // Subscribe to changes in the global state
         const unsubscribe = coinsStore.subscribe(() => {
-            // Update local state with the correct data:
+            // Update local state with the correct data
             setSelectedCoinsCount(coinsStore.getState().selectedCoinsCount);
         });
 
-        // Calling unsubscribe when our component destroyed:
-        return () => unsubscribe();
-    }, []);
+        // Call unsubscribe when our component is destroyed
+        return unsubscribe;
+    }
 
+    /** Toggles this coin's selection on/off. When toggled on, if the coin has a symbol, uses chartService to add the coin to
+     *  the Live Report. */
+    const toggleSelect = (event: ChangeEvent<HTMLInputElement>) => {
+        const selected = props.coin.selected = event.target.checked;
+        setIsSelected(selected);
+        if (props.coin.symbol) selected ? chartService.addCoin(props.coin) : chartService.removeCoin(props.coin);
+    }
 
+    /** Toggles "More Info" on/off for the coin. */
     function toggleInfo() {
         setShowInfo(current => !current);
     }
@@ -84,19 +79,18 @@ function CoinCard(props: CoinCardProps): JSX.Element {
     return (
         <div className="CoinCard">
             {!showInfo
-
                 && <div className="CartridgeFront">
                     <div className="form-check form-switch card-title">
                         {liveDataExists &&
                             <label className="switch">
-                                <input className={selectButtonClasses} type="checkbox" id={coinSelectID} onChange={toggleSelect} checked={isSelected} />
+                                <input className={selectButtonClasses} type="checkbox" onChange={toggleSelect} checked={isSelected} />
                                 <span className={sliderClasses}><span className="slider-text card-title">{props.coin.symbol}</span></span>
                             </label>}
 
                     </div>
                     <p className="card-text">{props.coin.name}</p>
 
-                    <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
+                    <button className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
                         More Info
                     </button>
                 </div>
@@ -105,7 +99,7 @@ function CoinCard(props: CoinCardProps): JSX.Element {
                     <div className="form-check form-switch">
                         {liveDataExists &&
                             <label className="switch">
-                                <input className={selectButtonClasses} type="checkbox" id={coinSelectID} onChange={toggleSelect} checked={isSelected} />
+                                <input className={selectButtonClasses} type="checkbox" onChange={toggleSelect} checked={isSelected} />
                                 <span className={sliderClasses}><span className="slider-text card-title">{props.coin.symbol}</span></span>
                             </label>}
                     </div>
@@ -117,7 +111,7 @@ function CoinCard(props: CoinCardProps): JSX.Element {
                         <img src={coinInfo?.image?.small}></img>
                     </span>
 
-                    <button id={moreInfoID} className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
+                    <button className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
                         Go Back
                     </button>
                 </div>}
