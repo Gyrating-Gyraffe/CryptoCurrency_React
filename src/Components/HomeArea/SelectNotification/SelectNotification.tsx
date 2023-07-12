@@ -1,7 +1,7 @@
 import { coinsStore } from "../../../Redux/CoinStates";
 import "./SelectNotification.css";
 import React, { useState, useEffect } from "react";
-import errorIcon from "../../../Assets/Images/error_icon.png";
+import errorIcon from "../../../Assets/Images/error_icon2.png";
 
 function SelectNotification(): JSX.Element {
     

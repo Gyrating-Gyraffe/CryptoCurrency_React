@@ -23,7 +23,7 @@ export interface CoinsAction {
 // 4. Reducer (invoked by redux library): 
 export function coinsReducer(currentState = new CoinsState(), action: CoinsAction): CoinsState {
 
-    const newState = { ...currentState }; // Duplicate the global state.
+    const newState = JSON.parse(JSON.stringify(currentState)); // Duplicate the global state.
 
     // Change the duplicated global state according the action:
     switch (action.type) {

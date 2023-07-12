@@ -8,16 +8,21 @@ import { logger } from "../../../Utils/Logger";
 function SelectedCoinsPopup(): JSX.Element {
 
     const [selectedCoinsArray, setSelectedCoinsArray] = useState<CoinModel[]>([]);
+    
 
     useEffect(() => {
+        setSelectedCoinsArray(coinsStore.getState().selectedCoinsArray);
         const unsubscribe = coinsStore.subscribe(() => {
             const arr = coinsStore.getState().selectedCoinsArray;
-            logger.log(coinsStore.getState().selectedCoinsArray.length.toString(), "LOGS");
             setSelectedCoinsArray(arr);
         })
 
         return () => unsubscribe();
     }, []);
+
+    useEffect(() => {
+
+    }, [selectedCoinsArray])
 
     return (
         <div className="SelectedCoinsPopup">
