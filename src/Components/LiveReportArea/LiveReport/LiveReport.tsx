@@ -7,7 +7,7 @@ import LiveCoinCard from "../../CoinsArea/LiveCoinCard/LiveCoinCard";
 import "./LiveReport.css";
 
 function LiveReport(): JSX.Element {
-    logger.log("Live Report called", "Component Load Sequence");
+    console.log("Live Report called", "Component Load Sequence");
 
     
 

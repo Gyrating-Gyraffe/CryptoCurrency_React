@@ -8,7 +8,7 @@ import logoImage from "../../../Assets/Images/ptm_logo.png";
 export const ScrollContext = createContext<number>(0);
 
 function Layout(): JSX.Element {
-    logger.log("Layout called", "Component Load Sequence");
+    console.log("Layout called", "Component Load Sequence");
 
     const [scrollValue, setScrollValue] = useState<number>(0);
     const mainRef = useRef<HTMLElement | null>(null);

@@ -9,6 +9,8 @@ import { ScrollContext } from "../../LayoutArea/Layout/Layout";
 import SelectedCoinsPopup from "../SelectedCoinsPopup/SelectedCoinsPopup";
 
 export function Home(): JSX.Element {
+    console.log("Home called", "Component Load Sequence");
+    
     /* Main element scroll Context from Layout.tsx
      Accepted values: -1 means we're near the top, 1 means we're near the bottom, 0 means neither. */
     const scrollDirection = useContext(ScrollContext);
@@ -40,7 +42,7 @@ export function Home(): JSX.Element {
      * 1. Symbol Length, 2. Search string, 3. Search relevance sort. */
     function applyCoinFilter(): void {
         const filtered: CoinModel[] =
-            coinsData.filter((coin: CoinModel) => { return coin.symbol ? coin.symbol.length <= 2 : false })
+            coinsData.filter((coin: CoinModel) => { return coin.symbol ? coin.symbol.length <= 7 : false })
                 .filter((coin: CoinModel) => { return searchValue ? coin.symbol!.startsWith(searchValue) : true })
                 .sort((a: CoinModel, b: CoinModel) => { return searchValue ? (a.symbol!.startsWith(b.symbol!) ? 0 : -1) : 0 });
 
