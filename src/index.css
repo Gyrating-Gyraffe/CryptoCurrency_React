@@ -14,10 +14,10 @@ html, body, #root {
   --secondary200: #3CAAEB;
   --secondary300: #4084E4;
   --secondary400: #4554DC;
-  --tertiary100: #ac88f3;
-  --tertiary200: #8361C7;
-  --tertiary300: #724fb8;
-  --tertiary400: #6537a1;
+  --tertiary100: #ffde8b;
+  --tertiary200: #e5c268;
+  --tertiary300: #ddb141;
+  --tertiary400: #b68d25;
   --warn100: #e69c9c;
   --warn200: #e08383;
   --warn250: #b45959;
@@ -34,13 +34,10 @@ html, body, #root {
   text-align: center;
   color: white;
   overflow: hidden;
-
-  transition: 1s all;
 }
 
 body {
-  background-image: url("Assets/Images/minimal_bg.png");
-  background-size: cover;
-  background-position: fixed;
+  background-color: #1E2430;
+  /* background-image: url("./Assets/Images/minimal_home_bg.png"); */
   /* background-color: var(--primary900); */
 }

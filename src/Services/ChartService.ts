@@ -46,6 +46,8 @@ class ChartService {
         this.chartOptions.axisX.title = "Time";
         this.chartOptions.axisY.pop(); // Clear the default object in the array (There is 1 object by default)
         this.chartOptions.backgroundColor = "#121f2b";
+        this.chartOptions.height = window.innerHeight * 0.9;
+        this.chartOptions.width = window.innerWidth * 0.82;
 
         // For every coin we are graphing - create a dataModel with all customization and properties, and add it to the chartData object
         for(let i = 0; i < this.coinCodesArray.length; i++) {

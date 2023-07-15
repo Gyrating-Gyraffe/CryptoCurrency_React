@@ -13,11 +13,11 @@ function LiveReport(): JSX.Element {
 
     return (
         <div className="LiveReport">
-			<h2>Live Report</h2>
+			{/* <h2>Live Report</h2> */}
 
-            <LiveCoinCard coinNames={coinsStore.getState().selectedCoinsArray.map(coin => coin.symbol ? `-${coin.symbol}-` : "" )}/>
-            
-            {/* <Chart /> */}
+            {/* <LiveCoinCard coinNames={coinsStore.getState().selectedCoinsArray.map(coin => coin.symbol ? `-${coin.symbol}-` : "" )}/> */}
+
+            <Chart />
             
         </div>
     );

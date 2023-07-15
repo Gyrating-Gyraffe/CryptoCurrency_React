@@ -1,47 +1,160 @@
+@keyframes firstLoad {
+    0% {
+        height: 0vh;
+        width: 45px;
+        translate: 100vw 50vh;
+        overflow: hidden;
+    }
+
+    40% {
+        height: 45px;
+        width: 45px;
+        translate: 35vw 40vh;
+        overflow: hidden;
+    }
+
+    43% {
+        height: 45px;
+        width: 45px;
+        translate: 35vw 40vh;
+        overflow: hidden;
+    }
+
+    100% {
+        height: 94vh;
+        width: 83.333vw;
+        translate: 0 0;
+        overflow: auto;
+    }
+}
+
+@keyframes firstLoadAside {
+    0% {
+        translate: 15vw 0;
+        opacity: 0;
+    }
+
+    50% {
+        translate: 25vw 0;
+        opacity: 0;
+    }
+
+    60% {
+        opacity: 0.4;
+    }
+
+    100% {
+        translate: 0 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slide {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -3840px 0;
+        /* The image width */
+    }
+}
+
+@keyframes flash {
+    0% {
+        color: #2a3242;
+    }
+
+    25% {
+        color: #6690e5;
+    }
+
+    100% {
+        color: #202632;
+    }
+}
+
+
 .Layout {
     height: 100%;
     box-sizing: border-box;
     display: grid;
-    grid-template-rows: 4% 96% 0%;
     grid-template-columns: repeat(12, 1fr);
     color: black;
 }
 
-.Layout>header,
+
+/* .Layout>header,
 .Layout>footer {
     grid-column: span 12;
     display: flex;
     flex-flow: row nowrap;
     background-color: var(--primary800);
-}
-.Layout > header > img {
+} */
+/* .Layout > header > img {
     margin: 0 -10% 0 5%;
     
-}
+} */
 
 .Layout>main {
-    grid-column: span 12;
+    animation: firstLoad 1.2s cubic-bezier(0.25, 0.46, 0.35, 1) forwards,
+        gradient 15s ease infinite,
+        slide 175s linear infinite;
+
+
+    grid-column: span 10;
     overflow: auto;
-    padding: 0 10% 0 10%;
+    margin: 3vh 2vw 3vh 0;
+    border-radius: 45px;
+    box-shadow: -1vw 0.7vw 2vw black;
+    background: rgb(68, 95, 222);
+    /* background: linear-gradient(135deg, rgba(68,95,222,1) 10%, rgba(64,144,232,1) 90%); */
+    background-size: 3840px 1080px;
+    background-image: url("../../../Assets/Images/minimal_home.png");
+
 }
 
 .Layout>aside {
-    grid-column: span 1;
+    animation: firstLoadAside 1.7s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    grid-column: span 2;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+
+    padding: 0 10% 0 10%;
 }
 
+.SearchBar::placeholder {
+    color: var(--primary400);
+}
 
+.SearchBar {
+    height: 30px;
+    width: 100%;
+
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+    font-size: 21px;
+
+    background-color: var(--primary700);
+    color: var(--primary100);
+
+    margin: 0;
+}
 
 /* SCROLLBAR CUSTOMIZATION */
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;   
+    width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
     background: var(--primary900);
-    border-radius: 4px;
+    border-radius: 5px 0 0 5px;
+    margin: 5vw 0 5vw 0;
 }
 
 /* Handle */
@@ -49,7 +162,7 @@
     background: var(--secondary300);
 }
 
-/* Handle on hover */  
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary100);
+    background: var(--primary100);
 }

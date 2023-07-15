@@ -1,19 +1,45 @@
 .Nav {
+    flex-basis: 20%;
 	display: flex;
-    height: 100%;
-    width: 30%;
+    flex-flow: column wrap;
+    height: auto;
+    width: 100%;
+    margin: 0;
+    padding: 8vh 0 0 0;
+    justify-content: start;
+    text-align: left;
+    font-size: 1.35rem;
+    color: var(--primary100);
+}
+
+.NavTitle {
+    margin: 0 0 1rem 0;
+    color: var(--primary300);
+}
+
+.NavLinkWrapper {
+    margin: 0.8rem 0 0 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-size: 1.65rem;
+}
+.NavLinkWrapper > img {
     margin: auto;
-    border-radius: 0 0 10px 10px;
-    justify-content: center;
-    background-color: var(--primary800);
+    margin-left: 0;
+    height: 1.2rem;
 }
 
 .NavLink {
-    margin: auto;
-    font-size: 2rem;
-    color: var(--primary200);
+    margin: 0;
+    text-decoration: none;
+    color: var(--primary300);
+
+    transition: color 0.2s ease-out;
+}
+.NavLink:hover {
+    color: var(--primary100);
 }
 .NavLink.active {
-    font-size: 2.2rem;
     color: var(--secondary300);
 }

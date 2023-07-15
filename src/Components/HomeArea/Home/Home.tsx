@@ -90,16 +90,16 @@ export function Home(): JSX.Element {
             <SelectNotification />
             {/* <SelectedCoinsPopup /> */}
             <div className="TextContainer">
-                {/* <h1 className="HomeTitle">Good Morning</h1>
-                <h3 className="HomeDescription">Let's play the market!</h3> */}
-                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                <h1 className="HomeTitle">Good Morning</h1>
+                <h3 className="HomeDescription">Let's play the market!</h3>
+               
             </div>
-            <input className="SearchBar"
+            {/* <input className="SearchBar"
                 type="text"
                 value={searchValue}
                 onChange={handleSearch}
                 placeholder="Search..."
-            />
+            /> */}
 
             <div className="CardContainer">
                 {filteredCoins.length > 0

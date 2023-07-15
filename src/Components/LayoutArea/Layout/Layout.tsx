@@ -3,7 +3,8 @@ import Nav from "../../NavArea/Nav/Nav";
 import Routing from "../Routing/Routing";
 import { createContext, useEffect, useRef, useState } from "react";
 import "./Layout.css";
-import logoImage from "../../../Assets/Images/ptm_logo.png";
+import bgSlideImage from "../../../Assets/Images/minimal_home.png";
+import SelectedCoinsWindow from "../../NavArea/SelectedCoinsWindow/SelectedCoinsWindow";
 
 export const ScrollContext = createContext<number>(0);
 
@@ -37,7 +38,16 @@ function Layout(): JSX.Element {
     
     return (
         <div className="Layout">
-			<header><Nav /></header>
+			<aside>
+                <Nav />
+                <br /><br /><br /><br /><br /><br /><br />
+                Library
+                <input className="SearchBar"
+                type="text"
+                placeholder=" Search  . . ." />
+                
+                <SelectedCoinsWindow />
+            </aside>
             <ScrollContext.Provider value={scrollValue}>
                 <main ref={mainRef}>
                     <Routing />

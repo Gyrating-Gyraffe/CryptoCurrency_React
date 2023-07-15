@@ -24,9 +24,11 @@
 
 .CartridgeFront,
 .CartridgeRear {
-    background-image: url("../../../Assets/Images/cartridgeFront2.png");
+    background-image: url("../../../Assets/Images/cartridgeFront3.png");
     background-size: cover;
     background-repeat: no-repeat;
+
+    border-radius: 8px;
 
     width: 250px;
     height: 260px;
@@ -88,9 +90,9 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 191px;
+    width: 193px;
     height: 55px;
-    translate: .5px -4px;
+    translate: 1.5px -4px;
 }
 
 /* Hide default HTML checkbox */
@@ -108,7 +110,7 @@
     left: 0px;
     right: 0;
     bottom: 0;
-    background-color: #6B7383;
+    background-color: #CDCDCD;
     -webkit-transition: .4s;
     transition: .4s;
     box-shadow: inset 0 0 4px black;

@@ -4,6 +4,8 @@ import ChartDataModel from "./ChartDataModel";
 // all necessary information and customization for the chart to render.
 class ChartOptionsModel {
     constructor(
+        public height: number = 1000,
+        public width: number = 1800,
         public theme: string = "dark1",
         public backgroundColor?: string,
         public colorSet?: string[],

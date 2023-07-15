@@ -1,0 +1,21 @@
+.SelectedCoinsWindow {
+    flex-basis: 30%;
+    width: 100%;
+    border-radius: 2vw;
+    margin: 10vh 0 0 0;
+    transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    background: linear-gradient(110deg, var(--primary600) 10%, var(--primary700) 90%);
+
+    box-shadow: 0 0 1rem black;
+
+    
+
+    color: var(--secondary100);
+
+
+}
+
+.SelectedCoinsWindow:hover {
+   
+}
