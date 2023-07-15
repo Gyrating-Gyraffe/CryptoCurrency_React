@@ -90,8 +90,9 @@ export function Home(): JSX.Element {
             <SelectNotification />
             {/* <SelectedCoinsPopup /> */}
             <div className="TextContainer">
-                <h1 className="HomeTitle">Good Morning</h1>
-                <h3 className="HomeDescription">Let's play the market!</h3>
+                {/* <h1 className="HomeTitle">Good Morning</h1>
+                <h3 className="HomeDescription">Let's play the market!</h3> */}
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             </div>
             <input className="SearchBar"
                 type="text"

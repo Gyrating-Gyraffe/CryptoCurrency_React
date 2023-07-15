@@ -24,7 +24,7 @@
 
 .CartridgeFront,
 .CartridgeRear {
-    background-image: url("../../../Assets/Images/cartridgeFront.png");
+    background-image: url("../../../Assets/Images/cartridgeFront2.png");
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -33,7 +33,7 @@
     margin: 0;
     padding: 20px 0 0 0;
 
-    color: var(--primary800);
+    color: var(--primary1000);
 
     display: flex;
     flex-flow: column nowrap;
@@ -108,7 +108,7 @@
     left: 0px;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #6B7383;
     -webkit-transition: .4s;
     transition: .4s;
     box-shadow: inset 0 0 4px black;
@@ -134,16 +134,16 @@
     background-color: var(--primary200);
 }
 .slider.bad-color:hover {
-    background-color: var(--warn100);
+    background-color: var(--warn250);
 }
 
 input.good-color:checked+.slider {
-    background-color: var(--primary600);
+    background-color: var(--secondary300);
     box-shadow: inset 0 0 6px black;
     color: var(--primary100);
 }
 input.bad-color:checked+.slider {
-    background-color: var(--warn500);
+    background-color: var(--warn400);
     box-shadow: inset 0 0 6px black;
     color: var(--primary100);
 }

@@ -7,19 +7,20 @@ html, body, #root {
   --primary500: #627D98;
   --primary600: #486581;
   --primary700: #334E68;
-  --primary800: #243B53;
+  --primary800: #242B3B;
   --primary900: #102A43;
   --primary1000: #121f2b;
-  --secondary100: #baf8d1;
-  --secondary200: #a3f0bf;
-  --secondary300: #70ea9c;
-  --secondary400: #42d97a;
-  --tertiary100: #f8b0d1;
-  --tertiary200: #f27ab2;
-  --tertiary300: #c3437f;
-  --tertiary400: #a92965;
+  --secondary100: #52abf0;
+  --secondary200: #3CAAEB;
+  --secondary300: #4084E4;
+  --secondary400: #4554DC;
+  --tertiary100: #ac88f3;
+  --tertiary200: #8361C7;
+  --tertiary300: #724fb8;
+  --tertiary400: #6537a1;
   --warn100: #e69c9c;
   --warn200: #e08383;
+  --warn250: #b45959;
   --warn300: #cf4b4b;
   --warn400: #983737;
   --warn500: #8b2828;
@@ -34,12 +35,12 @@ html, body, #root {
   color: white;
   overflow: hidden;
 
-  
+  transition: 1s all;
 }
 
 body {
-  /* background-image: url("Assets/Images/minimal_bg.png");
-  background-size: contain;
-  background-position: fixed; */
-  background-color: var(--primary900);
+  background-image: url("Assets/Images/minimal_bg.png");
+  background-size: cover;
+  background-position: fixed;
+  /* background-color: var(--primary900); */
 }
