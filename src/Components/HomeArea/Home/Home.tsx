@@ -7,6 +7,7 @@ import "./Home.css";
 import SelectNotification from "../SelectNotification/SelectNotification";
 import { ScrollContext } from "../../LayoutArea/Layout/Layout";
 import SelectedCoinsPopup from "../SelectedCoinsPopup/SelectedCoinsPopup";
+import { searchStore } from "../../../Redux/SearchStates";
 
 export function Home(): JSX.Element {
     console.log("Home called", "Component Load Sequence");
@@ -18,16 +19,22 @@ export function Home(): JSX.Element {
     // STATES
     const [coinsData, setCoinsData] = useState<CoinModel[]>([]);
     const [filteredCoins, setFilteredCoins] = useState<CoinModel[]>([]);
-    const [searchValue, setSearchValue] = useState<string>('');
+    const [searchString, setSearchString] = useState<string>('');
     const [coinSliceStart, setCoinSliceStart] = useState<number>(0);
     const [coinSliceEnd, setCoinSliceEnd] = useState<number>(100);
     const [loading, setLoading] = useState<boolean>(false); // Track whether new coins are being loaded
 
     // EFFECTS
     useEffect(fetchCoins, []);  // Initial coin fetch from API or Storage
-    useEffect(applyCoinFilter, [searchValue, coinsData]);  // Filter coin list
+    useEffect(applyCoinFilter, [searchString, coinsData]);  // Filter coin list
     useEffect(infiniteScroll, [scrollDirection, loading]);     // Show new coins on scroll triggers for infinite scrolling
     useEffect(finishScrollLoad, [coinSliceStart, coinSliceEnd, loading]); // Loading switch
+    useEffect(() => {
+        const unsubscribe = searchStore.subscribe(() => {
+            setSearchString(searchStore.getState().searchString);
+        })
+        return unsubscribe;
+    }, []);
 
     // METHODS
     /** Performs initial load of ALL crypto coins from CoinGecko and stores them in the 'coinsData' State array. */
@@ -43,15 +50,10 @@ export function Home(): JSX.Element {
     function applyCoinFilter(): void {
         const filtered: CoinModel[] =
             coinsData.filter((coin: CoinModel) => { return coin.symbol ? coin.symbol.length <= 7 : false })
-                .filter((coin: CoinModel) => { return searchValue ? coin.symbol!.startsWith(searchValue) : true })
-                .sort((a: CoinModel, b: CoinModel) => { return searchValue ? (a.symbol!.startsWith(b.symbol!) ? 0 : -1) : 0 });
+                .filter((coin: CoinModel) => { return searchString ? coin.symbol!.startsWith(searchString) : true })
+                .sort((a: CoinModel, b: CoinModel) => { return searchString ? (a.symbol!.startsWith(b.symbol!) ? 0 : -1) : 0 });
 
         setFilteredCoins(filtered);
-    };
-
-    /** Sets the value of the search string State. Called by 'onChange' from the search bar DOM element. */
-    function handleSearch(event: ChangeEvent<HTMLInputElement>): void {
-        setSearchValue(event.target.value);
     };
 
     /** Displaces the indices of the coins we render in reaction to scroll triggers. */

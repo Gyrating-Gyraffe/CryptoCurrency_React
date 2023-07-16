@@ -5,6 +5,7 @@ import { createContext, useEffect, useRef, useState } from "react";
 import "./Layout.css";
 import bgSlideImage from "../../../Assets/Images/minimal_home.png";
 import SelectedCoinsWindow from "../../NavArea/SelectedCoinsWindow/SelectedCoinsWindow";
+import SearchBar from "../../NavArea/SearchBar/SearchBar";
 
 export const ScrollContext = createContext<number>(0);
 
@@ -40,13 +41,6 @@ function Layout(): JSX.Element {
         <div className="Layout">
 			<aside>
                 <Nav />
-                <br /><br /><br /><br /><br /><br /><br />
-                Library
-                <input className="SearchBar"
-                type="text"
-                placeholder=" Search  . . ." />
-                
-                <SelectedCoinsWindow />
             </aside>
             <ScrollContext.Provider value={scrollValue}>
                 <main ref={mainRef}>

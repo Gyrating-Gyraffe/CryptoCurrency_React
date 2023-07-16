@@ -6,6 +6,8 @@ import aboutIcon from "../../../Assets/Images/Nav/AboutIcon.png";
 import liveReportIcon from "../../../Assets/Images/Nav/LiveReportIcon.png";
 import activeElementIcon from "../../../Assets/Images/Nav/ActiveButtonIcon.png";
 import { useState } from "react";
+import SearchBar from "../SearchBar/SearchBar";
+import SelectedCoinsWindow from "../SelectedCoinsWindow/SelectedCoinsWindow";
 
 enum CurrentPage {
     Home = "Home",
@@ -23,18 +25,25 @@ function Nav(): JSX.Element {
 
     return (
         <div className="Nav">
-            <div className="NavTitle">Menu</div>
-            <div className="NavLinkWrapper">
-                <img src={homeIcon} />
-			    <NavLink to={"/home"} className="NavLink">Home</NavLink>
+            <div className="NavGroup">
+                <div className="NavTitle">Menu</div>
+                <div className="NavLinkWrapper">
+                    <img src={homeIcon} />
+                    <NavLink to={"/home"} className="NavLink">Home</NavLink>
+                </div>
+                <div className="NavLinkWrapper">
+                    <img src={liveReportIcon} />
+                    <NavLink to={"/live"} className="NavLink">LiveReport</NavLink>
+                </div>
+                <div className="NavLinkWrapper">
+                    <img src={aboutIcon} />
+                    <NavLink to={"/about"} className="NavLink">About</NavLink>
+                </div>
             </div>
-            <div className="NavLinkWrapper">
-                <img src={liveReportIcon} />
-			    <NavLink to={"/live"} className="NavLink">LiveReport</NavLink>
-            </div>
-            <div className="NavLinkWrapper">
-                <img src={aboutIcon} />
-			    <NavLink to={"/about"} className="NavLink">About</NavLink>
+            <div className="NavGroup">
+                <div className="NavTitle">Library</div>
+                <SearchBar />
+                <SelectedCoinsWindow />
             </div>
         </div>
     );

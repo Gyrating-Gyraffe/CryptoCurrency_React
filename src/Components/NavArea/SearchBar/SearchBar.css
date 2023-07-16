@@ -1,0 +1,19 @@
+.SearchBar::placeholder {
+    color: var(--primary400);
+}
+
+.SearchBar {
+    height: 30px;
+    width: 100%;
+
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+    font-size: 21px;
+
+    background-color: var(--primary700);
+    color: var(--primary100);
+
+    margin: 0;
+}
+

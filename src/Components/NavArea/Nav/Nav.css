@@ -2,14 +2,16 @@
     flex-basis: 20%;
 	display: flex;
     flex-flow: column wrap;
-    height: auto;
+    height: 100% !important;
     width: 100%;
     margin: 0;
     padding: 8vh 0 0 0;
-    justify-content: start;
+    justify-content: space-between;
     text-align: left;
     font-size: 1.35rem;
     color: var(--primary100);
+
+    border: red solid 2px;
 }
 
 .NavTitle {
