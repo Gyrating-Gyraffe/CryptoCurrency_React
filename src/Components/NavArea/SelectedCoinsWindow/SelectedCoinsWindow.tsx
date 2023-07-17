@@ -31,7 +31,7 @@ function SelectedCoinsWindow(): JSX.Element {
     return (
         <div className={"SelectedCoinsWindow " + componentActiveStyle + " " + classNameStyling}>
             {selectedCoinsArr.map((coin, index) => (
-                <div className="CoinButton">
+                <div className={"CoinButton " + classNameStyling}>
                 <button className="CoinButtonRemove"  onClick={() => handleRemove(index)} key={index+255}>❌</button>
                 <button className="CoinButtonSearch" onClick={() => handleSearch(coin.id)} key={index} value={index}>
                     <div>{coin.symbol}: {coin.name}</div> <span className="magnifier">🔍</span>

@@ -34,6 +34,7 @@
     height: 30vh;
     padding: 10% 0 10% 0;
     overflow-y: auto;
+    filter: blur(1px);
 }
 
 .SelectedCoinsWindow:hover {
@@ -66,6 +67,13 @@
     box-shadow: 0 0 15px black;
     background-color: rgba(0, 0, 0, 0.068);
     color: var(--primary100);
+    z-index: 1;
+}
+.SelectedCoinsWindow .CoinButton:hover.good-color {
+    background-color: var(--secondary400);
+}
+.SelectedCoinsWindow .CoinButton:hover.bad-color {
+    background-color: var(--warn500);
 }
 
 .SelectedCoinsWindow .CoinButtonSearch {
