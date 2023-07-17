@@ -21,7 +21,8 @@ function SearchBar(): JSX.Element {
 			<input className="SearchBar"
                 type="text"
                 placeholder=" Search  . . ."
-                onChange={handleSearch} />
+                onChange={handleSearch}
+                value={searchString} />
         </div>
     );
 }

@@ -1,17 +1,19 @@
 .Nav {
-    flex-basis: 20%;
 	display: flex;
-    flex-flow: column wrap;
-    height: 100% !important;
+    flex-flow: column nowrap;
+    height: 100%;
     width: 100%;
     margin: 0;
     padding: 8vh 0 0 0;
-    justify-content: space-between;
+    justify-content: start;
     text-align: left;
     font-size: 1.35rem;
     color: var(--primary100);
+}
 
-    border: red solid 2px;
+.NavGroup {
+    flex-basis: 35%;
+
 }
 
 .NavTitle {

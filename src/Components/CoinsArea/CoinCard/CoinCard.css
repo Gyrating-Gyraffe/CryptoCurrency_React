@@ -15,6 +15,15 @@
     0% {translate: 0 0;}
     100% {translate: 0 -2px;}
 }
+@keyframes opacityFadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 
 
 .CoinCard {
@@ -33,7 +42,7 @@
     width: 250px;
     height: 260px;
     margin: 0;
-    padding: 20px 0 0 0;
+    padding: 17px 0 0 0;
 
     color: var(--primary1000);
 
@@ -41,11 +50,27 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    
+    /* animation: glow 1s alternate-reverse 2; */
 }
 
 .CartridgeRear img {
     margin: 0;
+}
+
+.CartridgeRear .LoadingMoreInfo {
+    animation: opacityFadeIn 0.7s ease infinite alternate;
+    color: var(--primary400);
+}
+
+.CartridgeRear .LoadingMoreInfoImage {
+    animation: opacityFadeIn 0.7s ease infinite alternate;
+    
+    width: 45px;
+    height: 45px;
+    margin: 5px auto;
+
+    border: 5px solid var(--primary400);
+    border-radius: 10px;
 }
 
 .form-switch {
@@ -54,21 +79,35 @@
 }
 
 
-.card-title {
+.form-switch {
     flex-basis: 20%;
-    font-size: 35px;;
+    width: 193px;
+}
+
+.card-title {
+    margin: 0 0 0 53px;
+    width: 95px;
+    line-height: 55px;
+    font-size: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .card-text {
     flex-basis: 60%;
-    font-size: 21px;
+    font-size: 19px;
     max-width: 166px;
     padding: 10px;
-
+    text-overflow: ellipsis;
+    overflow: hidden;
     margin: 0;
 }
 .CartridgeFront .card-text {
-    
+    white-space: normal;
+}
+.CartridgeRear .card-text {
+    white-space: nowrap;
 }
 
 .more-info {
@@ -88,11 +127,12 @@
 
 /* SELECT SWITCH */
 .switch {
+    margin-top: 4px;
     position: relative;
     display: inline-block;
     width: 193px;
     height: 55px;
-    translate: 1.5px -4px;
+    translate: 1.5px -5px;
 }
 
 /* Hide default HTML checkbox */
@@ -166,8 +206,7 @@ input:checked+.slider:before {
 }
 
 .slider-text {
-    line-height: 55px;
-    max-width: 5px;
+    
 }
 
 .slider.round:before {

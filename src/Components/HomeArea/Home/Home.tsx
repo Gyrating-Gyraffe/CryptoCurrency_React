@@ -29,12 +29,7 @@ export function Home(): JSX.Element {
     useEffect(applyCoinFilter, [searchString, coinsData]);  // Filter coin list
     useEffect(infiniteScroll, [scrollDirection, loading]);     // Show new coins on scroll triggers for infinite scrolling
     useEffect(finishScrollLoad, [coinSliceStart, coinSliceEnd, loading]); // Loading switch
-    useEffect(() => {
-        const unsubscribe = searchStore.subscribe(() => {
-            setSearchString(searchStore.getState().searchString);
-        })
-        return unsubscribe;
-    }, []);
+    useEffect(handleSearch, []);
 
     // METHODS
     /** Performs initial load of ALL crypto coins from CoinGecko and stores them in the 'coinsData' State array. */
@@ -45,38 +40,63 @@ export function Home(): JSX.Element {
             .catch(err => console.error("Unable to display coins: \n" + err.message));
     };
 
+    function handleSearch() {
+        // Set search string initially
+        setSearchString(searchStore.getState().searchString);
+        // Subscribe to changes in state
+        const unsubscribe = searchStore.subscribe(() => {
+            setSearchString(searchStore.getState().searchString);
+        })
+        return unsubscribe;
+    }
+
     /** Handles filtering the coins based on following criteria: 
      * 1. Symbol Length, 2. Search string, 3. Search relevance sort. */
     function applyCoinFilter(): void {
-        const filtered: CoinModel[] =
-            coinsData.filter((coin: CoinModel) => { return coin.symbol ? coin.symbol.length <= 7 : false })
-                .filter((coin: CoinModel) => { return searchString ? coin.symbol!.startsWith(searchString) : true })
-                .sort((a: CoinModel, b: CoinModel) => { return searchString ? (a.symbol!.startsWith(b.symbol!) ? 0 : -1) : 0 });
-
+        let filtered = filterBySymbolLength(coinsData, 7);
+        // Exclamation mark means filter by ID and Exclusive (Only fully matching ID strings will pass)
+        if(searchString[0] === "!") {
+            filtered = filterExclusiveByID(filtered, searchString.substring(1));
+        }
+        else {
+            filtered = filterInclusiveBySymbol(filtered, searchString);
+        }
         setFilteredCoins(filtered);
     };
+    function filterInclusiveBySymbol(array: CoinModel[], searchString: string): CoinModel[] {
+        return array.filter((coin: CoinModel) => { return searchString ? coin.symbol!.startsWith(searchString) : true })
+                .sort((a: CoinModel, b: CoinModel) => { return searchString ? (a.symbol!.startsWith(b.symbol!) ? 0 : -1) : 0 }); 
+    }
+    function filterExclusiveByID(array: CoinModel[], searchString: string): CoinModel[] {
+        return array.filter((coin: CoinModel) => { return coin.id === searchString });
+    }
+    function filterBySymbolLength(array: CoinModel[], maxLength: number): CoinModel[] {
+        return array.filter((coin: CoinModel) => { return coin.symbol ? coin.symbol.length <= maxLength : false });
+    }
 
     /** Displaces the indices of the coins we render in reaction to scroll triggers. */
     function infiniteScroll(): void {
         // Don't run if still loading last request or no scroll trigger is detected
         if (loading) return;
         if (!scrollDirection) return;
+        
+        const sliceSize = filteredCoins.length >= 100 ? 100 : filteredCoins.length; // 100 by default. Or filteredCoins.length if it's smaller than 100
 
         const shift = (start: number, end: number, val: number) => {
             // Check if we're at either end of the page to stop setting states
             if (start + val === coinSliceStart || end + val === coinSliceEnd) return;
-            setCoinSliceStart(start + val);
-            setCoinSliceEnd(end + val);
+            setCoinSliceStart((start + val)); // Ternary prevents negative numbers as start values for the slice
+            setCoinSliceEnd((end + val));
             setLoading(true);
         };
 
         // *Shift number should be a common denominator of all possible numbers of coin cards per row to avoid flex-related layout shifts 
-        const shiftDirection: number = scrollDirection / Math.abs(scrollDirection); // scrollTriger used as direction multiplier        
+        const shiftDirection: number = scrollDirection; // scrollTrigger used as direction multiplier        
         let coinShift: number = 20 * shiftDirection;
 
         // Prevent out of bounds
         if (coinSliceStart + coinShift < 0) return shift(0, 100, 0);
-        if (coinSliceEnd + coinShift > filteredCoins.length) return shift(filteredCoins.length - 101, filteredCoins.length - 1, 0);
+        if (coinSliceEnd + coinShift > filteredCoins.length) return shift(filteredCoins.length - sliceSize, filteredCoins.length - 1, 0);
 
         // Apply default shift
         shift(coinSliceStart, coinSliceEnd, coinShift);
@@ -89,7 +109,6 @@ export function Home(): JSX.Element {
 
     return (
         <div className="Home">
-            <SelectNotification />
             {/* <SelectedCoinsPopup /> */}
             <div className="TextContainer">
                 <h1 className="HomeTitle">Good Morning</h1>

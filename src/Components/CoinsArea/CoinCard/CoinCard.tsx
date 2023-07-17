@@ -16,16 +16,24 @@ type CoinCardProps = {
 
 /** Receives a coin object and builds a card for that coin */
 function CoinCard(props: CoinCardProps): JSX.Element {
-    // STATES
+    // STATES 
+    const [selectedCoinsArr, setSelectedCoinsArr] = useState<CoinModel[]>([]);
     const [coinInfo, setCoinInfo] = useState<CoinInfoModel>();
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const [liveDataExists, setLiveDataExists] = useState<boolean>(false);
-    const [isSelected, setIsSelected] = useState<boolean>(!!props.coin.selected);
-    const [selectedCoinsCount, setSelectedCoinsCount] = useState<number>(0);
+    const [isSelected, setIsSelected] = useState<boolean>(false);
     
+
+
+
+
+
+
+
+
     // Classes controlling slider/selection button styling
-    const selectButtonClasses: string = `form-check-input coin-select ${selectedCoinsCount > 5 ? "bad-color" : "good-color"}`;
-    const sliderClasses: string = `slider round ${selectedCoinsCount > 4 ? "bad-color" : "good-color"}`;
+    const selectButtonClasses: string = `form-check-input coin-select ${selectedCoinsArr.length > 5 ? "bad-color" : "good-color"}`;
+    const sliderClasses: string = `slider round ${selectedCoinsArr.length > 4 ? "bad-color" : "good-color"}`;
 
     // Check if live data exists for this coin in CryptoCompare
     useEffect(() => {
@@ -38,10 +46,11 @@ function CoinCard(props: CoinCardProps): JSX.Element {
 
     // EFFECTS
     useEffect(fetchMoreInfo, [showInfo]);   // Loads additional info when "More Info" button is pressed
-    useEffect(subToSelectedCoinsCount, []); // Redux subscription
+    useEffect(subToSelectedCoinsArr, []); // Redux subscription
+    useEffect(checkSelection, [selectedCoinsArr]);
 
     // METHODS
-    /** Retrives more info on the coin such as the price in USD/EUR/ILS and the Image. */
+    /** Retrieves more info on the coin such as the price in USD/EUR/ILS and the Image. */
     function fetchMoreInfo(): void {
         if (!showInfo) return;
         dataService.requestData(appConfig.coinsAPIUrl + props.coin.id)
@@ -49,26 +58,33 @@ function CoinCard(props: CoinCardProps): JSX.Element {
             .catch(err => console.error("Unable to display coins: ", err.message));
     }
 
-    /** Subscribes to the coinsStore's global Selected Coins Count state, and updates the local state when needed. */
-    function subToSelectedCoinsCount(): Unsubscribe {
-        setSelectedCoinsCount(coinsStore.getState().selectedCoinsCount);
-
-        // Subscribe to changes in the global state
+    /** Subscribes to the coinsStore's global Selected Coins Array state, and updates the local state when needed. */
+    function subToSelectedCoinsArr(): Unsubscribe {
+        setSelectedCoinsArr(coinsStore.getState().selectedCoinsArray);
+        
         const unsubscribe = coinsStore.subscribe(() => {
-            // Update local state with the correct data
-            setSelectedCoinsCount(coinsStore.getState().selectedCoinsCount);
+            // Update local state with global data
+            setSelectedCoinsArr(coinsStore.getState().selectedCoinsArray);
+            // checkSelection(coinsStore.getState().selectedCoinsArray);
         });
-
-        // Call unsubscribe when our component is destroyed
         return unsubscribe;
     }
 
     /** Toggles this coin's selection on/off. When toggled on, if the coin has a symbol, uses chartService to add the coin to
      *  the Live Report. */
     const toggleSelect = (event: ChangeEvent<HTMLInputElement>) => {
-        const selected = props.coin.selected = event.target.checked;
+        const selected  = event.target.checked;
         setIsSelected(selected);
         if (props.coin.symbol) selected ? chartService.addCoin(props.coin) : chartService.removeCoin(props.coin);
+    }
+
+    function checkSelection() {
+        if(selectedCoinsArr.filter(coin => coin.id === props.coin.id).length <= 0) {
+            setIsSelected(false);
+        }
+        else {
+            setIsSelected(true);
+        }
     }
 
     /** Toggles "More Info" on/off for the coin. */
@@ -80,11 +96,11 @@ function CoinCard(props: CoinCardProps): JSX.Element {
         <div className="CoinCard">
             {!showInfo
                 && <div className="CartridgeFront">
-                    <div className="form-check form-switch card-title">
+                    <div className="form-check form-switch">
                         {liveDataExists &&
                             <label className="switch">
                                 <input className={selectButtonClasses} type="checkbox" onChange={toggleSelect} checked={isSelected} />
-                                <span className={sliderClasses}><span className="slider-text card-title">{props.coin.symbol}</span></span>
+                                <span className={sliderClasses}><div className="slider-text card-title">{props.coin.symbol}</div></span>
                             </label>}
 
                     </div>
@@ -100,15 +116,22 @@ function CoinCard(props: CoinCardProps): JSX.Element {
                         {liveDataExists &&
                             <label className="switch">
                                 <input className={selectButtonClasses} type="checkbox" onChange={toggleSelect} checked={isSelected} />
-                                <span className={sliderClasses}><span className="slider-text card-title">{props.coin.symbol}</span></span>
+                                <span className={sliderClasses}><div className="slider-text card-title">{props.coin.symbol}</div></span>
                             </label>}
                     </div>
                     <span className="card-text">
                         {props.coin.name}
-                        <div>EUR: {coinInfo?.market_data?.current_price?.eur}</div>
-                        <div>USD: {coinInfo?.market_data?.current_price?.usd}</div>
-                        <div>ILS: {coinInfo?.market_data?.current_price?.ils}</div>
-                        <img src={coinInfo?.image?.small}></img>
+                        
+                        
+                        {coinInfo?.market_data?.current_price.eur && 
+                            <div>EUR: {coinInfo.market_data.current_price.eur.toLocaleString()}$</div> || <div className="LoadingMoreInfo">Loading EUR</div> }
+                        {coinInfo?.market_data?.current_price.usd && 
+                        <div>USD: {coinInfo.market_data.current_price.usd.toLocaleString()}€</div> || <div className="LoadingMoreInfo">Loading USD</div> }
+                        {coinInfo?.market_data?.current_price.ils && 
+                        <div>ILS: {coinInfo.market_data.current_price.ils.toLocaleString()}₪</div> || <div className="LoadingMoreInfo">Loading ILS</div> }
+                        
+                        {coinInfo?.image?.small &&
+                        <img src={coinInfo.image.small}></img> || <div className="LoadingMoreInfoImage"></div>}
                     </span>
 
                     <button className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>

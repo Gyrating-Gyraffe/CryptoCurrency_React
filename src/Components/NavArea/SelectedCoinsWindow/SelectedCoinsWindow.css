@@ -1,15 +1,17 @@
 .SelectedCoinsWindow {
     height: 0;
-    width: 80%;
+    width: 100%;
     border-radius: 2vw;
-    margin: 10vh 0 0 0;
+    margin: 10% 0 0 0;
     transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
     
-    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
-    background: linear-gradient(110deg, var(--primary600) 10%, var(--primary700) 90%);
+    /* background: linear-gradient(110deg, var(--primary600) 10%, var(--primary700) 90%); */
+    background: linear-gradient(110deg, var(--secondary200) 10%, var(--secondary400) 90%);
 
-    box-shadow: 0 0 1rem black;
+    box-shadow: inset 0 0 1.5rem black;
 
     text-align: left;
 
@@ -18,8 +20,9 @@
     opacity: 0;
     translate: 0 15vh;
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row wrap;
     justify-content: center;
+    align-items: center;
 
     transition: 0.7s all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
@@ -29,13 +32,81 @@
     translate: 0 0;
     opacity: 1;
     height: 30vh;
-    padding: 10% 0 10% 10%;
+    padding: 10% 0 10% 0;
     overflow-y: auto;
 }
 
-.SelectedCoinsWindow.active .good-color {
-    color: var(--secondary100);
+.SelectedCoinsWindow:hover {
+    transition: all 0.4s;
+    box-shadow: inset 0 0 1.5rem rgb(77, 77, 77);
+    filter: contrast(1.1);
 }
-.SelectedCoinsWindow.active .bad-color {
-    color: var(--warn300);
+
+.SelectedCoinsWindow.active.good-color {
+    border: var(--primary200) 2px solid;
+    background: linear-gradient(110deg, var(--secondary200) 10%, var(--secondary400) 90%);
+}
+.SelectedCoinsWindow.active.bad-color {
+    border: var(--primary200) 2px solid;
+    background: linear-gradient(110deg, var(--warn300) 10%, var(--warn500) 90%);
+}
+
+.SelectedCoinsWindow .CoinButton {
+    overflow: hidden;
+    padding: 0 10% 0 0;
+    transition: all 0.05s;
+    display: flex;
+    width: 100%;
+    height: 100px;
+}
+
+.SelectedCoinsWindow .CoinButton:hover {
+    transition: all 0.5s 0.05s cubic-bezier(0.175, 0.885, 0.32, 1.875);
+    scale: 1.1;
+    box-shadow: 0 0 15px black;
+    background-color: rgba(0, 0, 0, 0.068);
+    color: var(--primary100);
+}
+
+.SelectedCoinsWindow .CoinButtonSearch {
+    cursor: pointer;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    border: none;
+    color: var(--primary200);
+    background-color: transparent;
+    font-size: 21px;
+    width: 70%;
+    height: 100px;
+}
+.SelectedCoinsWindow .magnifier {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.SelectedCoinsWindow .CoinButtonSearch:hover .magnifier {
+    font-size: 25px;
+    animation: hover5px 0.5s linear infinite alternate;
+}
+
+.SelectedCoinsWindow .CoinButtonRemove {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 21px;
+    width: 40%;
+    height: 100px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.SelectedCoinsWindow .CoinButtonRemove:hover {
+    
+    font-size: 31px;
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+
+@keyframes hover5px {
+    0% {translate: 0 5px;}
+    100% {translate: 0 -5px;}
 }

@@ -35,10 +35,9 @@ export function coinsReducer(currentState = new CoinsState(), action: CoinsActio
 
         case CoinsActionType.RemoveSelected: 
             newState.selectedCoinsCount -= 1;
-            const index = newState.selectedCoinsArray.indexOf(action.payload);
-            console.warn(index);
+            const { id } = action.payload;
             
-            newState.selectedCoinsArray.splice(index, 1);
+            newState.selectedCoinsArray = currentState.selectedCoinsArray.filter(coin => coin.id !== id);
             break;
 
         case CoinsActionType.ResetSelected: 

@@ -4,6 +4,7 @@ import { coinsStore } from "../../../Redux/CoinStates";
 import { unsubscribe } from "diagnostics_channel";
 import CoinModel from "../../../Models/CoinModel";
 import { chartService } from "../../../Services/ChartService";
+import { SearchActionType, searchStore } from "../../../Redux/SearchStates";
 
 function SelectedCoinsWindow(): JSX.Element {
     const [selectedCoinsArr, setSelectedCoinsArr] = useState<CoinModel[]>([]);
@@ -18,21 +19,23 @@ function SelectedCoinsWindow(): JSX.Element {
         return unsubscribe;
     }, []);
 
-    function handleCheckbox(event: React.ChangeEvent<HTMLInputElement>) {
-        if ((typeof event.target.value !== "number") || event.target.checked) return;
-        chartService.removeCoin(selectedCoinsArr[event.target.value]);
-        selectedCoinsArr.splice(event.target.value, 1);
+    function handleRemove(index: number) {
+        chartService.removeCoin(selectedCoinsArr[index]);
+        selectedCoinsArr.splice(index, 1);
+    }
+    
+    function handleSearch(searchString: string | undefined) {
+        searchStore.dispatch({type: SearchActionType.UpdateSearchString, payload: `!${searchString}`});
     }
 
     return (
-        <div className={"SelectedCoinsWindow " + componentActiveStyle}>
+        <div className={"SelectedCoinsWindow " + componentActiveStyle + " " + classNameStyling}>
             {selectedCoinsArr.map((coin, index) => (
-                <div className={classNameStyling} key={index}>
-                    {coin.symbol}: {coin.name}
-                    <input type="checkbox"
-                        value={index}
-                        onChange={handleCheckbox}
-                         />
+                <div className="CoinButton">
+                <button className="CoinButtonRemove"  onClick={() => handleRemove(index)} key={index+255}>❌</button>
+                <button className="CoinButtonSearch" onClick={() => handleSearch(coin.id)} key={index} value={index}>
+                    <div>{coin.symbol}: {coin.name}</div> <span className="magnifier">🔍</span>
+                </button>
                 </div>
             ))}
         </div>

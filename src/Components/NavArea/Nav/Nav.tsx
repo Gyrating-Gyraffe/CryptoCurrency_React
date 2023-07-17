@@ -8,6 +8,7 @@ import activeElementIcon from "../../../Assets/Images/Nav/ActiveButtonIcon.png";
 import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import SelectedCoinsWindow from "../SelectedCoinsWindow/SelectedCoinsWindow";
+import SelectNotification from "../../HomeArea/SelectNotification/SelectNotification";
 
 enum CurrentPage {
     Home = "Home",
@@ -24,7 +25,7 @@ function Nav(): JSX.Element {
     }
 
     return (
-        <div className="Nav">
+        <div className="Nav">       
             <div className="NavGroup">
                 <div className="NavTitle">Menu</div>
                 <div className="NavLinkWrapper">
