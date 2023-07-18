@@ -1,14 +1,27 @@
 .Nav {
-	display: flex;
-    flex-flow: column nowrap;
+    display: flex;
     height: 100%;
     width: 100%;
     margin: 0;
-    padding: 8vh 0 0 0;
-    justify-content: start;
     text-align: left;
-    font-size: 1.35rem;
+    font-size: 20rem;
     color: var(--primary100);
+}
+
+@media (orientation: landscape) {
+    .Nav {
+        flex-flow: column nowrap;
+        justify-content: start;
+        padding: 8vh 0 0 0;
+    }
+}
+  
+@media (orientation: portrait) {
+    .Nav {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        padding: 40rem 0 0 0;
+    }
 }
 
 .NavGroup {
@@ -17,21 +30,21 @@
 }
 
 .NavTitle {
-    margin: 0 0 1rem 0;
+    margin: 0 0 16rem 0;
     color: var(--primary300);
 }
 
 .NavLinkWrapper {
-    margin: 0.8rem 0 0 0;
+    margin: 12.8rem 0 0 0;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    font-size: 1.65rem;
+    font-size: 26.4rem;
 }
 .NavLinkWrapper > img {
     margin: auto;
     margin-left: 0;
-    height: 1.2rem;
+    height: 19.2rem;
 }
 
 .NavLink {

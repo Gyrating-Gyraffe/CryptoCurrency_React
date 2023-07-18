@@ -1,3 +1,5 @@
-.LiveReport {
-	
+main .LiveReport {
+    overflow: hidden !important;
 }
+
+

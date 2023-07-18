@@ -43,17 +43,20 @@ class ChartService {
         this.chartData = [];
         this.chartOptions = new ChartOptionsModel();
         this.chartOptions.colorSet = this.colorSet;
-        this.chartOptions.axisX.title = "Time";
+        this.chartOptions.axisX = {title: "Time", titleFontSize: window.innerWidth / 60,
+            labelFontSize: window.innerWidth / 90};
         this.chartOptions.axisY.pop(); // Clear the default object in the array (There is 1 object by default)
         this.chartOptions.backgroundColor = "#121f2b";
-        this.chartOptions.height = window.innerHeight * 0.9;
-        this.chartOptions.width = window.innerWidth * 0.82;
+        this.chartOptions.height = window.innerHeight * 0.94;
+        this.chartOptions.width = window.innerWidth * 0.9;
 
         // For every coin we are graphing - create a dataModel with all customization and properties, and add it to the chartData object
         for(let i = 0; i < this.coinCodesArray.length; i++) {
             this.chartOptions.axisY.push({ 
                 title: this.coinCodesArray[i],
                 titleFontColor: this.colorSet[i],
+                titleFontSize: window.innerWidth / 60,
+                labelFontSize: window.innerWidth / 90,
                 lineColor: this.colorSet[i],
                 labelFontColor: this.colorSet[i],
                 tickColor: this.colorSet[i] });
@@ -170,10 +173,10 @@ class ChartService {
     // Set up a set of colors to be used by the chart
     private setUpColorSet(): void {
         this.colorSet = [//colorSet Array
-        "#7CFF01",
-        "#FFF205",
-        "#FF1178",
-        "#8FAABB",
+        "#000080",
+        "#00FFEF",
+        "#87CEEB",
+        "#D1EAF0",
         "#B08BEB",
         "#3EA0DD",
         "#F5A52A",

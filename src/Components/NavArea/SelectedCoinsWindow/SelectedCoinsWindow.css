@@ -34,7 +34,7 @@
     height: 30vh;
     padding: 10% 0 10% 0;
     overflow-y: auto;
-    filter: blur(1px);
+    filter: blur(1rem);
 }
 
 .SelectedCoinsWindow:hover {
@@ -44,11 +44,11 @@
 }
 
 .SelectedCoinsWindow.active.good-color {
-    border: var(--primary200) 2px solid;
+    border: var(--primary200) 2rem solid;
     background: linear-gradient(110deg, var(--secondary200) 10%, var(--secondary400) 90%);
 }
 .SelectedCoinsWindow.active.bad-color {
-    border: var(--primary200) 2px solid;
+    border: var(--primary200) 2rem solid;
     background: linear-gradient(110deg, var(--warn300) 10%, var(--warn500) 90%);
 }
 
@@ -58,13 +58,13 @@
     transition: all 0.05s;
     display: flex;
     width: 100%;
-    height: 100px;
+    height: 100rem;
 }
 
 .SelectedCoinsWindow .CoinButton:hover {
     transition: all 0.5s 0.05s cubic-bezier(0.175, 0.885, 0.32, 1.875);
     scale: 1.1;
-    box-shadow: 0 0 15px black;
+    box-shadow: 0 0 15rem black;
     background-color: rgba(0, 0, 0, 0.068);
     color: var(--primary100);
     z-index: 1;
@@ -86,35 +86,35 @@
     border: none;
     color: var(--primary200);
     background-color: transparent;
-    font-size: 21px;
+    font-size: 21rem;
     width: 70%;
-    height: 100px;
+    height: 100rem;
 }
 .SelectedCoinsWindow .magnifier {
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .SelectedCoinsWindow .CoinButtonSearch:hover .magnifier {
-    font-size: 25px;
-    animation: hover5px 0.5s linear infinite alternate;
+    font-size: 25rem;
+    animation: hover5rem 0.5s linear infinite alternate;
 }
 
 .SelectedCoinsWindow .CoinButtonRemove {
     cursor: pointer;
     border: none;
     background-color: transparent;
-    font-size: 21px;
+    font-size: 21rem;
     width: 40%;
-    height: 100px;
+    height: 100rem;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .SelectedCoinsWindow .CoinButtonRemove:hover {
     
-    font-size: 31px;
+    font-size: 31rem;
     background-color: rgba(255, 0, 0, 0.5);
 }
 
 
-@keyframes hover5px {
-    0% {translate: 0 5px;}
-    100% {translate: 0 -5px;}
+@keyframes hover5rem {
+    0% {translate: 0 5rem;}
+    100% {translate: 0 -5rem;}
 }

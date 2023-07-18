@@ -80,7 +80,7 @@ export function Home(): JSX.Element {
         if (loading) return;
         if (!scrollDirection) return;
         
-        const sliceSize = filteredCoins.length >= 100 ? 100 : filteredCoins.length; // 100 by default. Or filteredCoins.length if it's smaller than 100
+        const sliceSize = filteredCoins.length >= 60 ? 60 : filteredCoins.length; // 100 by default. Or filteredCoins.length if it's smaller than 100
 
         const shift = (start: number, end: number, val: number) => {
             // Check if we're at either end of the page to stop setting states
@@ -92,10 +92,10 @@ export function Home(): JSX.Element {
 
         // *Shift number should be a common denominator of all possible numbers of coin cards per row to avoid flex-related layout shifts 
         const shiftDirection: number = scrollDirection; // scrollTrigger used as direction multiplier        
-        let coinShift: number = 20 * shiftDirection;
+        let coinShift: number = 12 * shiftDirection;
 
         // Prevent out of bounds
-        if (coinSliceStart + coinShift < 0) return shift(0, 100, 0);
+        if (coinSliceStart + coinShift < 0) return shift(0, 60, 0);
         if (coinSliceEnd + coinShift > filteredCoins.length) return shift(filteredCoins.length - sliceSize, filteredCoins.length - 1, 0);
 
         // Apply default shift

@@ -3,13 +3,13 @@
 }
 
 .SearchBar {
-    height: 30px;
+    height: 30rem;
     width: 100%;
 
-    border-radius: 20px;
+    border-radius: 20rem;
     border: none;
     text-align: center;
-    font-size: 21px;
+    font-size: 21rem;
 
     background-color: var(--primary700);
     color: var(--primary100);

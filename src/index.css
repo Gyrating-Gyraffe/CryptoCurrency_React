@@ -1,4 +1,5 @@
 html, body, #root {
+  /* Theme Colors */
   --primary50: #F0F4F8;
   --primary100: #D9E2EC;
   --primary200: #BCCCDC;
@@ -25,8 +26,8 @@ html, body, #root {
   --warn400: #983737;
   --warn500: #8b2828;
 
+  /* Typography */
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
 
   margin: 0;
   padding: 0;
@@ -34,10 +35,80 @@ html, body, #root {
   text-align: center;
   color: white;
   overflow: hidden;
+
+  /* Font size is used for 'rem' inheritance and usage. In usage 1rem will equal 1px at 1920x1080 (I.E an element that uses rem will 
+  use 16rem to achieve a 16px default font size). */
+  font-size: 2.1px;
 }
 
 body {
   background-color: #1E2430;
-  /* background-image: url("./Assets/Images/minimal_home_bg.png"); */
-  /* background-color: var(--primary900); */
+}
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 4096px) {
+  html, body, #root {
+    font-size: 2.1px;
+  }
+}
+@media screen and (max-width: 3200px) {
+  html, body, #root {
+    font-size: 1.8px;
+  }
+}
+@media screen and (max-width: 2560px) {
+  html, body, #root {
+    font-size: 1.3px;
+    border: none;
+  }
+}
+@media screen and (max-width: 1920px) {
+  html, body, #root {
+    font-size: 1px;
+  }
+}
+@media screen and (max-width: 1440px) {
+  html, body, #root {
+    font-size: 0.8px;
+  }
+}
+@media screen and (max-width: 992px) {
+  html, body, #root {
+    font-size: 0.6px;
+  }
+}
+@media screen and (max-width: 740px) {
+  html, body, #root {
+    font-size: 0.5px;
+  }
+}
+@media screen and (max-width: 550px) {
+  html, body, #root {
+    font-size: 0.3px;
+  }
+}
+
+/* SCROLLBAR CUSTOMIZATION */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--primary900);
+  border-radius: 15rem 0 0 15rem;
+  margin: 5vw 0 5vw 0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--secondary300);
+  border-radius: 15rem 0 0 15rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary100);
 }

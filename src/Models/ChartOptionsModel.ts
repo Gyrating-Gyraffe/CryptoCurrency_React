@@ -10,16 +10,18 @@ class ChartOptionsModel {
         public backgroundColor?: string,
         public colorSet?: string[],
         public animationEnabled: boolean = false,
-        public title: { text: string } = { text: "Real-time Coin Worth" },
+        public title: { text: string } = { text: "Live Report" },
         public subtitles: { text: string }[] = [
-            { text: "Click Legend to Hide or Unhide Data Series" },
+            { text: "Real-time coin market prices" },
         ],
-        public axisX: { title?: string } = { title: "States" },
+        public axisX: { title?: string, titleFontSize?: number, labelFontSize?: number } = { title: "States" },
         public axisY: [{
             title: string;
             titleFontColor?: string;
+            titleFontSize?: number;
             lineColor?: string;
             labelFontColor?: string;
+            labelFontSize?: number;
             tickColor?: string;
             minimum?: number;
             maximum?: number;

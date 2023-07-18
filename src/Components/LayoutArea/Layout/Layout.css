@@ -1,21 +1,21 @@
 @keyframes firstLoad {
     0% {
         height: 0vh;
-        width: 45px;
+        width: 45rem;
         translate: 100vw 50vh;
         overflow: hidden;
     }
 
     40% {
-        height: 45px;
-        width: 45px;
+        height: 45rem;
+        width: 45rem;
         translate: 35vw 40vh;
         overflow: hidden;
     }
 
     43% {
-        height: 45px;
-        width: 45px;
+        height: 45rem;
+        width: 45rem;
         translate: 35vw 40vh;
         overflow: hidden;
     }
@@ -55,96 +55,81 @@
     }
 
     100% {
-        background-position: -3840px 0;
+        background-position: -3840rem 0;
         /* The image width */
     }
 }
 
-@keyframes flash {
-    0% {
-        color: #2a3242;
+
+
+@media (orientation: landscape) {
+    .Layout {
+        height: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        color: black;
     }
-
-    25% {
-        color: #6690e5;
-    }
-
-    100% {
-        color: #202632;
-    }
-}
-
-
-.Layout {
-    height: 100%;
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    color: black;
-}
-
-
-/* .Layout>header,
-.Layout>footer {
-    grid-column: span 12;
-    display: flex;
-    flex-flow: row nowrap;
-    background-color: var(--primary800);
-} */
-/* .Layout > header > img {
-    margin: 0 -10% 0 5%;
+    .Layout>main {
+        animation: firstLoad 1.2s cubic-bezier(0.25, 0.46, 0.35, 1) forwards,
+            gradient 15s ease infinite,
+            slide 175s linear infinite;
     
-} */
+    
+        grid-column: span 10;
+        overflow: auto;
+        margin: 3vh 2vw 3vh 0;
+        border-radius: 45rem;
+        box-shadow: -1vw 0.7vw 2vw black;
+        background: rgb(68, 95, 222);
+        /* background: linear-gradient(135deg, rgba(68,95,222,1) 10%, rgba(64,144,232,1) 90%); */
+        background-size: 3840rem 1080rem;
+        background-image: url("../../../Assets/Images/minimal_home.png");
+    
+    }
+    
+    .Layout>aside {
+        animation: firstLoadAside 1.7s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+        grid-column: span 2;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: flex-start;
+        height: 100vh;
 
-.Layout>main {
-    animation: firstLoad 1.2s cubic-bezier(0.25, 0.46, 0.35, 1) forwards,
-        gradient 15s ease infinite,
-        slide 175s linear infinite;
-
-
-    grid-column: span 10;
-    overflow: auto;
-    margin: 3vh 2vw 3vh 0;
-    border-radius: 45px;
-    box-shadow: -1vw 0.7vw 2vw black;
-    background: rgb(68, 95, 222);
-    /* background: linear-gradient(135deg, rgba(68,95,222,1) 10%, rgba(64,144,232,1) 90%); */
-    background-size: 3840px 1080px;
-    background-image: url("../../../Assets/Images/minimal_home.png");
-
+        padding: 0 10% 0 10%;
+    }
 }
 
-.Layout>aside {
-    animation: firstLoadAside 1.7s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
-    grid-column: span 2;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: flex-start;
-    height: 100vh;
-
-    padding: 0 10% 0 10%;
-}
-
-/* SCROLLBAR CUSTOMIZATION */
-
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: var(--primary900);
-    border-radius: 5px 0 0 5px;
-    margin: 5vw 0 5vw 0;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: var(--secondary300);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary100);
+@media (orientation: portrait) {
+    .Layout {
+        height: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-rows: repeat(12, 1fr);
+        color: black;
+        overflow: auto;
+    }
+    .Layout>aside {
+        animation: firstLoadAside 1.7s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+        height: 15vh;
+        padding: 0 10% 0 5%;
+        overflow: hidden;
+    }
+    .Layout>main {
+        animation: firstLoad 1.2s cubic-bezier(0.25, 0.46, 0.35, 1) forwards,
+            gradient 15s ease infinite,
+            slide 175s linear infinite;
+    
+    
+        grid-row: span 10;
+        order: 1;
+        margin: 20rem auto;
+        border-radius: 45rem;
+        box-shadow: -1vw 0.7vw 2vw black;
+        background: rgb(68, 95, 222);
+        /* background: linear-gradient(135deg, rgba(68,95,222,1) 10%, rgba(64,144,232,1) 90%); */
+        background-size: 3840rem 1080rem;
+        background-image: url("../../../Assets/Images/minimal_home.png");
+    
+    }
 }

@@ -23,8 +23,8 @@ function Layout(): JSX.Element {
             // Last received scroll position in <main> element
             const lastScrollPos: number = mainRef.current.scrollTop;   
             // Infinite scroll trigger boundaries
-            const scrollMargin = 1400; // Margin in px
-            const topScroll = 0 + scrollMargin + 600;
+            const scrollMargin = window.innerHeight * 1.3; // Margin in px
+            const topScroll = 0 + scrollMargin * 1.5;
             const botScroll = mainRef.current.scrollHeight - scrollMargin;
 
             // Is 1 if we're near bottom, 0 if we're in the center, and -1 if we're near the top. Follows HTML y-axis convention

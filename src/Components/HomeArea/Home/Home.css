@@ -27,8 +27,8 @@
 .CoinContainer:hover {
     margin: 0 2% 2% 2% !important;
     flex-basis: 15%;
-    filter: drop-shadow(15px 15px 5px rgba(0, 0, 0, 0.644));
-    translate: -10px -5px;
+    filter: drop-shadow(15rem 15rem 5rem rgba(0, 0, 0, 0.644));
+    translate: -10rem -5rem;
     scale: 1.05;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -43,13 +43,13 @@
 }
 
 .HomeTitle {
-    font-size: 65px;
+    font-size: 65rem;
     color: var(--primary50);
     font-weight: 200;
     margin: 0 0 0 0;
 }
 .HomeDescription {
-    font-size: 35px;
+    font-size: 35rem;
     color: var(--primary200);
     font-weight: 200;
     margin: 0 0 5vw 0;
