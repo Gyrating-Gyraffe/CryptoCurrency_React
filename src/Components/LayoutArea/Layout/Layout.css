@@ -59,6 +59,16 @@
         /* The image width */
     }
 }
+@keyframes slidePortrait {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 3840rem;
+        /* The image width */
+    }
+}
 
 
 
@@ -83,7 +93,7 @@
         box-shadow: -1vw 0.7vw 2vw black;
         background: rgb(68, 95, 222);
         /* background: linear-gradient(135deg, rgba(68,95,222,1) 10%, rgba(64,144,232,1) 90%); */
-        background-size: 3840rem 1080rem;
+        background-size: 4185rem 1180rem;
         background-image: url("../../../Assets/Images/minimal_home.png");
     
     }
@@ -111,14 +121,14 @@
     }
     .Layout>aside {
         animation: firstLoadAside 1.7s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
-        height: 15vh;
+        height: 350rem;
         padding: 0 10% 0 5%;
         overflow: hidden;
     }
     .Layout>main {
         animation: firstLoad 1.2s cubic-bezier(0.25, 0.46, 0.35, 1) forwards,
             gradient 15s ease infinite,
-            slide 175s linear infinite;
+            slidePortrait 175s linear infinite;
     
     
         grid-row: span 10;
@@ -128,8 +138,8 @@
         box-shadow: -1vw 0.7vw 2vw black;
         background: rgb(68, 95, 222);
         /* background: linear-gradient(135deg, rgba(68,95,222,1) 10%, rgba(64,144,232,1) 90%); */
-        background-size: 3840rem 1080rem;
-        background-image: url("../../../Assets/Images/minimal_home.png");
+        background-size: 1350rem 4800rem;
+        background-image: url("../../../Assets/Images/minimal_home_portrait.png");
     
     }
 }

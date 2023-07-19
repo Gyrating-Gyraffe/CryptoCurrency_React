@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
-import "./SelectedCoinsWindow.css";
-import { coinsStore } from "../../../Redux/CoinStates";
-import { unsubscribe } from "diagnostics_channel";
 import CoinModel from "../../../Models/CoinModel";
-import { chartService } from "../../../Services/ChartService";
+import { coinsStore } from "../../../Redux/CoinStates";
 import { SearchActionType, searchStore } from "../../../Redux/SearchStates";
+import { chartService } from "../../../Services/ChartService";
+import "./SelectedCoinsWindow.css";
 
 function SelectedCoinsWindow(): JSX.Element {
     const [selectedCoinsArr, setSelectedCoinsArr] = useState<CoinModel[]>([]);
     const classNameStyling: string = selectedCoinsArr.length > 5 ? "bad-color" : "good-color";
     const componentActiveStyle: string = selectedCoinsArr.length > 0 ? "active" : "";
 
-    useEffect(() => {
+    useEffect(subToSelectedCoinsArr, []);
+
+    function subToSelectedCoinsArr() {
         const unsubscribe = coinsStore.subscribe(() => {
             // Update local state with global data
             setSelectedCoinsArr(coinsStore.getState().selectedCoinsArray);
         });
         return unsubscribe;
-    }, []);
+    }
 
     function handleRemove(index: number) {
         chartService.removeCoin(selectedCoinsArr[index]);

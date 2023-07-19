@@ -55,6 +55,8 @@
 
 .CartridgeRear img {
     margin: 0;
+    height: 50rem;
+    width: 50rem;
 }
 
 .CartridgeRear .LoadingMoreInfo {
@@ -65,9 +67,9 @@
 .CartridgeRear .LoadingMoreInfoImage {
     animation: opacityFadeIn 0.7s ease infinite alternate;
     
-    width: 45rem;
-    height: 45rem;
-    margin: 5rem auto;
+    width: 40rem;
+    height: 40rem;
+    margin: 0rem auto;
 
     border: 5rem solid var(--primary400);
     border-radius: 10rem;
@@ -94,9 +96,13 @@
     white-space: nowrap;
 }
 
+.CartridgeFront .card-text {
+    font-size: 30rem;
+}
+
 .card-text {
     flex-basis: 60%;
-    font-size: 19rem;
+    font-size: 23rem;
     max-width: 166rem;
     padding: 10rem;
     text-overflow: ellipsis;

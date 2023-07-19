@@ -1,13 +1,11 @@
-import { useEffect, useState, ChangeEvent, useContext } from "react";
-import { dataService } from "../../../Services/DataService";
-import CoinCard from "../../CoinsArea/CoinCard/CoinCard";
+import { useContext, useEffect, useState } from "react";
 import CoinModel from "../../../Models/CoinModel";
-import { appConfig } from "../../../Utils/AppConfig";
-import "./Home.css";
-import SelectNotification from "../SelectNotification/SelectNotification";
-import { ScrollContext } from "../../LayoutArea/Layout/Layout";
-import SelectedCoinsPopup from "../SelectedCoinsPopup/SelectedCoinsPopup";
 import { searchStore } from "../../../Redux/SearchStates";
+import { dataService } from "../../../Services/DataService";
+import { appConfig } from "../../../Utils/AppConfig";
+import CoinCard from "../../CoinsArea/CoinCard/CoinCard";
+import { ScrollContext } from "../../LayoutArea/Layout/Layout";
+import "./Home.css";
 
 export function Home(): JSX.Element {
     console.log("Home called", "Component Load Sequence");
@@ -109,18 +107,11 @@ export function Home(): JSX.Element {
 
     return (
         <div className="Home">
-            {/* <SelectedCoinsPopup /> */}
             <div className="TextContainer">
                 <h1 className="HomeTitle">Good Morning</h1>
                 <h3 className="HomeDescription">Let's play the market!</h3>
                
             </div>
-            {/* <input className="SearchBar"
-                type="text"
-                value={searchValue}
-                onChange={handleSearch}
-                placeholder="Search..."
-            /> */}
 
             <div className="CardContainer">
                 {filteredCoins.length > 0

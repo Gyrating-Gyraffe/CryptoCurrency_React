@@ -46,7 +46,6 @@ function Layout(): JSX.Element {
         };
     }, []);
 
-    
     return (
         <div className="Layout">
 			<aside>

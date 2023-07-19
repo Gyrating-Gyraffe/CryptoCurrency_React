@@ -1,9 +1,9 @@
-import "./Routing.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import About from "../../AboutArea/About/About";
 import Home from "../../HomeArea/Home/Home";
 import LiveReport from "../../LiveReportArea/LiveReport/LiveReport";
-import About from "../../AboutArea/About/About";
 import Page404 from "../Page404/Page404";
+import "./Routing.css";
 
 function Routing(): JSX.Element {
     return (

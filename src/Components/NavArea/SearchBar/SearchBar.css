@@ -17,3 +17,10 @@
     margin: 0;
 }
 
+@media (orientation: portrait) {
+    .SearchBar {
+        height: 70rem;
+        font-size: 40rem;
+    }
+}
+

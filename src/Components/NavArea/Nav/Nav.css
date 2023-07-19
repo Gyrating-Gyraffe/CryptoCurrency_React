@@ -7,6 +7,13 @@
     font-size: 20rem;
     color: var(--primary100);
 }
+.NavLinkWrapper {
+    margin: 12.8rem 0 0 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-size: 26.4rem;
+}
 
 @media (orientation: landscape) {
     .Nav {
@@ -18,9 +25,29 @@
   
 @media (orientation: portrait) {
     .Nav {
-        flex-flow: row nowrap;
+        flex-flow: column nowrap;
         justify-content: space-between;
         padding: 40rem 0 0 0;
+    }
+    .NavGroup {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10vw 0 10vw;
+        margin-bottom: 100rem;
+    }
+    .NavTitle {
+        display: none;
+    }
+    .NavLinkWrapper {
+        margin: 0 10% 0 10%;
+    }
+    .NavLink {
+        font-size: 65rem;
+    }
+    .NavLinkWrapper > img {
+        display: none;
     }
 }
 
@@ -28,12 +55,6 @@
     flex-basis: 35%;
 
 }
-
-.NavTitle {
-    margin: 0 0 16rem 0;
-    color: var(--primary300);
-}
-
 .NavLinkWrapper {
     margin: 12.8rem 0 0 0;
     display: flex;
@@ -41,6 +62,12 @@
     justify-content: space-between;
     font-size: 26.4rem;
 }
+
+.NavTitle {
+    margin: 0 0 16rem 0;
+    color: var(--primary300);
+}
+
 .NavLinkWrapper > img {
     margin: auto;
     margin-left: 0;

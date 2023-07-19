@@ -3,12 +3,11 @@ import "./SelectNotification.css";
 import React, { useState, useEffect } from "react";
 import errorIcon from "../../../Assets/Images/error_icon2.png";
 
+// The select notification has a timeout before it is removed from the DOM. This allows it to animate its destruction.
 function SelectNotification(): JSX.Element {
-    
-
+    // STATES
     const [renderNotification, setRenderNotification] = useState<boolean>(false); // This decides whether the notification is rendered in the virtual DOM
     const [notificationCondition, setNotificationCondition] = useState<boolean>(false); // This is in charge of visually showing the notification or hiding it
-
     const[selectedCoinsCount, setSelectedCoinsCount] = useState<number>(0);
 
     const className = `SelectNotification ${notificationCondition ? "animate-enter" : "animate-exit"}`;

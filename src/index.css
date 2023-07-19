@@ -77,14 +77,14 @@ body {
     font-size: 0.6px;
   }
 }
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 720px) {
   html, body, #root {
     font-size: 0.5px;
   }
 }
 @media screen and (max-width: 550px) {
   html, body, #root {
-    font-size: 0.3px;
+    font-size: 0.35px;
   }
 }
 

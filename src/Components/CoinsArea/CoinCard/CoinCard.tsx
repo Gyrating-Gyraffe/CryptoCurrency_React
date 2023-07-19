@@ -22,14 +22,6 @@ function CoinCard(props: CoinCardProps): JSX.Element {
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const [liveDataExists, setLiveDataExists] = useState<boolean>(false);
     const [isSelected, setIsSelected] = useState<boolean>(false);
-    
-
-
-
-
-
-
-
 
     // Classes controlling slider/selection button styling
     const selectButtonClasses: string = `form-check-input coin-select ${selectedCoinsArr.length > 5 ? "bad-color" : "good-color"}`;
@@ -75,10 +67,12 @@ function CoinCard(props: CoinCardProps): JSX.Element {
     const toggleSelect = (event: ChangeEvent<HTMLInputElement>) => {
         const selected  = event.target.checked;
         setIsSelected(selected);
-        if (props.coin.symbol) selected ? chartService.addCoin(props.coin) : chartService.removeCoin(props.coin);
+        if (selected) chartService.addCoin(props.coin);
+        else chartService.removeCoin(props.coin);
     }
 
     function checkSelection() {
+        // Check if selectedCoinsArr includes this coin using ID
         if(selectedCoinsArr.filter(coin => coin.id === props.coin.id).length <= 0) {
             setIsSelected(false);
         }
@@ -135,7 +129,7 @@ function CoinCard(props: CoinCardProps): JSX.Element {
                     </span>
 
                     <button className="btn btn-primary more-info" data-bs-toggle="collapse" onClick={toggleInfo}>
-                        Go Back
+                        Less Info
                     </button>
                 </div>}
         </div>

@@ -173,7 +173,7 @@ class ChartService {
     // Set up a set of colors to be used by the chart
     private setUpColorSet(): void {
         this.colorSet = [//colorSet Array
-        "#000080",
+        "#6f6fff",
         "#00FFEF",
         "#87CEEB",
         "#D1EAF0",
