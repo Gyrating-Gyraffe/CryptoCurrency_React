@@ -19,11 +19,14 @@ function SelectionPopup(props: SelectionPopupProps): JSX.Element {
 
     return (
         <div className={props.className}>     
-            <div>You must remove {coinsLeftToRemove} more {coinsLeftToRemove > 1 ? "coins" : "coin"} to continue. </div>
+            <div>You must remove &nbsp;
+                <span className="HighlightedText">{coinsLeftToRemove} more {coinsLeftToRemove > 1 ? "coins" : "coin"}</span>
+                &nbsp; to continue. 
+            </div>
 			{props.coinsArray.map((coin, index) => (
                 <div className="CoinWrapper" key={index}>
                     <button className="CoinButtonRemove"  onClick={() => handleRemove(index)} >❌</button>
-                    <div className="CoinText">{coin.symbol}: {coin.name}</div>
+                    <div className="CoinText">{index + 1}. {coin.name} <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({coin.symbol}) </div>
                 </div>
             ))}
             <button className="ClosePopupButton" onClick={props.onClose}>Close</button>

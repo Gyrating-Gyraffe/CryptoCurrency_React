@@ -25,28 +25,26 @@ export function Home(): JSX.Element {
     const [loading, setLoading] = useState<boolean>(false); // Track whether new coins are being loaded
 
     // EFFECTS
-    useEffect(fetchCoins, []);  // Initial coin fetch from API or Storage
+    useEffect(initHome, []);  // Initial coin fetch from API or Storage
     useEffect(applyCoinFilter, [searchString, coinsData]);  // Filter coin list
     useEffect(infiniteScroll, [scrollDirection, loading]);     // Show new coins on scroll triggers for infinite scrolling
     useEffect(finishScrollLoad, [coinSliceStart, coinSliceEnd, loading]); // Loading switch
-    useEffect(handleSearch, []);
 
     // METHODS
-    /** Performs initial load of ALL crypto coins from CoinGecko and stores them in the 'coinsData' State array. */
-    function fetchCoins(): void {
+    function initHome() {
+        // Fetch coins
         dataService.requestData(appConfig.coinsAPIUrl + "list")
             .then(coins => setCoinsData(coins.map((coin: CoinModel, index: number) => { coin.jsxKey = index; return coin }))
             )
             .catch(err => console.error("Unable to display coins: \n" + err.message));
-    };
 
-    function handleSearch() {
-        // Set search string initially
+        // Set up search handling
         setSearchString(searchStore.getState().searchString);
-        // Subscribe to changes in state
         const unsubscribe = searchStore.subscribe(() => {
             setSearchString(searchStore.getState().searchString);
         })
+        
+        // Component cleanup
         return unsubscribe;
     }
 

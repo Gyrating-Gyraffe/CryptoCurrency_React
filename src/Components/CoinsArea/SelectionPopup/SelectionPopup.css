@@ -10,26 +10,28 @@
 
 .SelectionPopup {
     position: absolute;
+    padding: 5%;
     top: -70vh;
     left: -20vw;
 	opacity: 0;
     width: 75vw;
     height: 75vh;
     border: var(--primary200) 2rem solid;
-    background: linear-gradient(110deg, var(--warn300) 10%, var(--warn500) 90%);
-    box-shadow: 0 0 25rem black;
+    background: linear-gradient(110deg, rgb(175, 30, 42) 10%, rgb(92, 20, 26) 90%);
+    box-shadow: inset 0 0 25rem black;
     border-radius: 35rem;
 
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    color: var(--primary100);
+    color: var(--warn100);
 
     display: flex;
     flex-flow: column nowrap;
     justify-content: start;
 
-    font-size: 45rem;
-    text-align: center;
+    font-size: 50rem;
+    text-align: left;
     /* z-index: 1; */
 }
 
@@ -44,6 +46,19 @@
     margin: 25rem 0 0 0;
     display: flex;
     flex-direction: row nowrap;
+    color: var(--warn200);
+    transition: all 0.35s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+.SelectionPopup .CoinWrapper:hover {
+    cursor: default;
+    transition: all 0.07s linear;
+    scale: 1.1;
+    box-shadow: 0 0 15rem black;
+    background-color: rgba(250, 40, 57, 0.474);
+    translate: 5% 0;
+    z-index: 0;
+    color: var(--primary200);
 }
 
 .SelectionPopup .CoinButtonRemove {
@@ -53,8 +68,9 @@
 .SelectionPopup .CoinText {
     height: auto;
     margin: 0 0 0 5%;
+    line-height: 125%;
     font-size: 50rem;
-    color: var(--primary200);
+   
 }
 
 .SelectionPopup .Overlay {
@@ -72,27 +88,28 @@
     background-color: transparent;
     font-size: 25rem;
     width: 10%;
-    height: 70rem;
+    height: 100%;
     margin: 0;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: rgba(83, 0, 0, 0.236);
 }
 .SelectionPopup .CoinButtonRemove:hover {
     width: 20%;
     font-size: 31rem;
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .SelectionPopup .ClosePopupButton {
-    position: inherit;
+    position: fixed;
     cursor: pointer;
     width: 25%;
-    height: 15%;
+    height: 12%;
     font-size: 40rem;
     font-weight: 600;
 
     left: 70%;
-    top: 80%;
-    background: linear-gradient(110deg, var(--warn250) 10%, var(--warn400) 90%);
+    top: 82%;
+    background: linear-gradient(110deg, rgb(213, 46, 60) 10%, rgb(250, 40, 57) 90%);
     border-top: rgba(255, 255, 255, 0.436) 2px solid;
     border-left: rgba(255, 255, 255, 0.462) 2px solid;
     border-bottom: black 2px solid;
@@ -100,7 +117,7 @@
     box-shadow: 5rem 5rem 10rem black;
     border-radius: 10rem;
 
-    color: var(--warn100);
+    color: var(--primary200);
     transition: 0.3s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
@@ -111,4 +128,8 @@
     color: var(--primary100);
     filter: contrast(1.2);
     box-shadow: 7rem 7rem 14rem black;
+}
+
+.SelectionPopup .HighlightedText {
+    color: var(--primary100);
 }
