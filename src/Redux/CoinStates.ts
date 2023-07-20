@@ -5,13 +5,15 @@ import CoinModel from "../Models/CoinModel";
 export class CoinsState {
     public selectedCoinsCount: number = 0;
     public selectedCoinsArray: CoinModel[] = [];
+    public selectionPopupOpen: boolean = false;
 }
 
 // 2. Action Type:
 export enum CoinsActionType {
     AddSelected = "AddSelected",
     RemoveSelected = "RemoveSelected",
-    ResetSelected = "ResetSelected"
+    ResetSelected = "ResetSelected",
+    // ToggleSelectionPopup = "ToggleSelectionPopup"
 }
 
 // 3. Action:
@@ -27,7 +29,6 @@ export function coinsReducer(currentState = new CoinsState(), action: CoinsActio
 
     // Change the duplicated global state according the action:
     switch (action.type) {
-
         case CoinsActionType.AddSelected: 
             newState.selectedCoinsCount +=  1;
             newState.selectedCoinsArray.push(action.payload);
@@ -35,8 +36,7 @@ export function coinsReducer(currentState = new CoinsState(), action: CoinsActio
 
         case CoinsActionType.RemoveSelected: 
             newState.selectedCoinsCount -= 1;
-            const { id } = action.payload;
-            
+            const { id } = action.payload;      
             newState.selectedCoinsArray = currentState.selectedCoinsArray.filter(coin => coin.id !== id);
             break;
 
@@ -44,6 +44,9 @@ export function coinsReducer(currentState = new CoinsState(), action: CoinsActio
             newState.selectedCoinsCount = 0;
             newState.selectedCoinsArray = [];
             break;
+        // case CoinsActionType.ToggleSelectionPopup: 
+        //     newState.selectionPopupOpen = !currentState.selectionPopupOpen;
+        //     break;
     }
 
     return newState; // Return the changed duplicated global state.

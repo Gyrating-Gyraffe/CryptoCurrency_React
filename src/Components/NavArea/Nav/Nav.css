@@ -87,3 +87,7 @@
 .NavLink.active {
     color: var(--secondary300);
 }
+
+.NavLink.Unavailable {
+    color: var(--warn300);
+}

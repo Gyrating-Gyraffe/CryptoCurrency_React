@@ -5,6 +5,8 @@ import { dataService } from "../../../Services/DataService";
 import { appConfig } from "../../../Utils/AppConfig";
 import CoinCard from "../../CoinsArea/CoinCard/CoinCard";
 import { ScrollContext } from "../../LayoutArea/Layout/Layout";
+import noCoinsFoundImage from "../../../Assets/Images/no_coins_found.png";
+import coinLoadImage from "../../../Assets/Images/coin_loading_2.svg";
 import "./Home.css";
 
 export function Home(): JSX.Element {
@@ -19,7 +21,7 @@ export function Home(): JSX.Element {
     const [filteredCoins, setFilteredCoins] = useState<CoinModel[]>([]);
     const [searchString, setSearchString] = useState<string>('');
     const [coinSliceStart, setCoinSliceStart] = useState<number>(0);
-    const [coinSliceEnd, setCoinSliceEnd] = useState<number>(100);
+    const [coinSliceEnd, setCoinSliceEnd] = useState<number>(60);
     const [loading, setLoading] = useState<boolean>(false); // Track whether new coins are being loaded
 
     // EFFECTS
@@ -121,7 +123,9 @@ export function Home(): JSX.Element {
                                 <CoinCard key={coin.jsxKey} coin={coin} />
                             </div>
                         ))
-                    : coinsData.length > 0 && <h1>NO COINS MATCHING SEARCH</h1> || <h1>NO COINS LOADED FROM API</h1>}
+                    : searchString.length > 0 && <div className="NoCoinsFound">I can't find any coins!<img src={noCoinsFoundImage} /></div> 
+                    || <div className="LoadingCoins"><img src={coinLoadImage} /></div>}
+                    {loading && <div className="LoadingCoins"><img src={coinLoadImage} /></div>}
             </div>
         </div>
     );

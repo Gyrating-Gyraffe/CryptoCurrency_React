@@ -1,0 +1,9 @@
+.PopupOverlay {
+    position: inherit;
+    top: -180vh;
+    left: -180vw;
+	width: 300vw;
+    height: 300vh;
+    background-color: rgba(0, 0, 0, 0.486);
+    z-index: 0;
+}

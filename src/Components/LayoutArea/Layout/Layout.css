@@ -4,8 +4,8 @@
         width: 45rem;
         translate: 100vw 50vh;
         overflow: hidden;
+        filter: none;
     }
-
     40% {
         height: 45rem;
         width: 45rem;

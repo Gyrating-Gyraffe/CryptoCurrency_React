@@ -8,7 +8,7 @@ import "./SelectedCoinsWindow.css";
 function SelectedCoinsWindow(): JSX.Element {
     const [selectedCoinsArr, setSelectedCoinsArr] = useState<CoinModel[]>([]);
     const classNameStyling: string = selectedCoinsArr.length > 5 ? "bad-color" : "good-color";
-    const componentActiveStyle: string = selectedCoinsArr.length > 0 ? "active" : "";
+    const componentActiveStyle: string = (selectedCoinsArr.length > 0 ? "active" : "");
 
     useEffect(subToSelectedCoinsArr, []);
 

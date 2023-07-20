@@ -1,0 +1,114 @@
+@keyframes selectionPopupEnter {
+    0% {}
+    100% {opacity: 1;}
+}
+@keyframes selectionPopupExit {
+    0% {}
+    100% {opacity: 0;}
+}
+
+
+.SelectionPopup {
+    position: absolute;
+    top: -70vh;
+    left: -20vw;
+	opacity: 0;
+    width: 75vw;
+    height: 75vh;
+    border: var(--primary200) 2rem solid;
+    background: linear-gradient(110deg, var(--warn300) 10%, var(--warn500) 90%);
+    box-shadow: 0 0 25rem black;
+    border-radius: 35rem;
+
+    overflow: auto;
+
+    color: var(--primary100);
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+
+    font-size: 45rem;
+    text-align: center;
+    /* z-index: 1; */
+}
+
+.SelectionPopup.animate-enter {
+    animation: selectionPopupEnter 0.8s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+}
+.SelectionPopup.animate-exit {
+    animation: selectionPopupExit 0.8s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+}
+
+.SelectionPopup .CoinWrapper {
+    margin: 25rem 0 0 0;
+    display: flex;
+    flex-direction: row nowrap;
+}
+
+.SelectionPopup .CoinButtonRemove {
+    margin: 0 10% 0 0;
+}
+
+.SelectionPopup .CoinText {
+    height: auto;
+    margin: 0 0 0 5%;
+    font-size: 50rem;
+    color: var(--primary200);
+}
+
+.SelectionPopup .Overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+
+    background-color: black;
+}
+
+.SelectionPopup .CoinButtonRemove {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 25rem;
+    width: 10%;
+    height: 70rem;
+    margin: 0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.SelectionPopup .CoinButtonRemove:hover {
+    width: 20%;
+    font-size: 31rem;
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.SelectionPopup .ClosePopupButton {
+    position: inherit;
+    cursor: pointer;
+    width: 25%;
+    height: 15%;
+    font-size: 40rem;
+    font-weight: 600;
+
+    left: 70%;
+    top: 80%;
+    background: linear-gradient(110deg, var(--warn250) 10%, var(--warn400) 90%);
+    border-top: rgba(255, 255, 255, 0.436) 2px solid;
+    border-left: rgba(255, 255, 255, 0.462) 2px solid;
+    border-bottom: black 2px solid;
+    border-radius: black 2px solid;
+    box-shadow: 5rem 5rem 10rem black;
+    border-radius: 10rem;
+
+    color: var(--warn100);
+    transition: 0.3s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.SelectionPopup .ClosePopupButton:hover {
+    transition: 0.3s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+    scale: 1.1;
+    color: var(--primary100);
+    filter: contrast(1.2);
+    box-shadow: 7rem 7rem 14rem black;
+}

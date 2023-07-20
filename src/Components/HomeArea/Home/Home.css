@@ -1,13 +1,10 @@
-@keyframes appear {
-    0% {scale: 1; translate: -120% 0;}
-    100% {scale: 1; translate: 0; }
+@keyframes homeTitleAppear {
+    0% {translate: 0 -100rem; opacity: 0;}
+    100% {translate: 0; opacity: 1;}
 }
 .Home {
     /* animation: appear 0.7s cubic-bezier(0.47, 0, 0.745, 1); */
     
-}
-.Home.Leave {
-    animation: appear 0.7s cubic-bezier(0.47, 0, 0.745, 1) reverse;
 }
 
 .CardContainer {
@@ -41,16 +38,35 @@
 
     text-align: start;
 }
-
 .HomeTitle {
+    opacity: 0;
     font-size: 65rem;
     color: var(--primary50);
     font-weight: 200;
     margin: 0 0 0 0;
+
+    animation: homeTitleAppear 1s 0.8s cubic-bezier(0.075, 0.32, 0.465, 1) forwards;
 }
 .HomeDescription {
+    opacity: 0;
     font-size: 35rem;
     color: var(--primary200);
     font-weight: 200;
     margin: 0 0 5vw 0;
+    animation: homeTitleAppear 1s 0.8s cubic-bezier(0.075, 0.62, 0.465, 1) forwards;
+}
+.Home .NoCoinsFound {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0;
+    font-size: 30rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--primary100);
+    justify-content: center;
+    align-items: center;
+}
+
+.Home .NoCoinsFound img {
+    height: 300rem;
+    width: 170rem;
 }

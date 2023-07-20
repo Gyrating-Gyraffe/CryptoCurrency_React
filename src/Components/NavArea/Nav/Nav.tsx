@@ -5,16 +5,23 @@ import liveReportIcon from "../../../Assets/Images/Nav/LiveReportIcon.png";
 import SearchBar from "../SearchBar/SearchBar";
 import SelectedCoinsWindow from "../SelectedCoinsWindow/SelectedCoinsWindow";
 import "./Nav.css";
-
-enum CurrentPage {
-    Home = "Home",
-    Live = "Live",
-    About = "About"
-}
+import { useEffect, useState } from "react";
+import { coinsStore } from "../../../Redux/CoinStates";
 
 function Nav(): JSX.Element {
+    const [liveReportAvailable, setLiveReportAvailable] = useState<boolean>(true);
+    const liveReportClassname = liveReportAvailable ? "NavLink" : "NavLink Unavailable";
+
+    useEffect(() => {
+        const unsubscribe = coinsStore.subscribe(() => {
+            setLiveReportAvailable(coinsStore.getState().selectedCoinsArray.length < 6);
+        });
+
+        return unsubscribe;
+    }, []);
+
     return (
-        <div className="Nav">       
+        <div className="Nav">     
             <div className="NavGroup">
                 <div className="NavTitle">Menu</div>
                 <div className="NavLinkWrapper">
@@ -23,7 +30,7 @@ function Nav(): JSX.Element {
                 </div>
                 <div className="NavLinkWrapper">
                     <img src={liveReportIcon} />
-                    <NavLink to={"/live"} className="NavLink">LiveReport</NavLink>
+                    <NavLink to={liveReportAvailable ? "/live" : "/home"} className={liveReportClassname}>LiveReport</NavLink>
                 </div>
                 <div className="NavLinkWrapper">
                     <img src={aboutIcon} />

@@ -1,14 +1,11 @@
-import { logger } from "../../../Utils/Logger";
+import { createContext, useEffect, useRef, useState } from "react";
+import SelectNotification from "../../CoinsArea/SelectNotification/SelectNotification";
 import Nav from "../../NavArea/Nav/Nav";
 import Routing from "../Routing/Routing";
-import { createContext, useEffect, useRef, useState } from "react";
 import "./Layout.css";
-import bgSlideImage from "../../../Assets/Images/minimal_home.png";
-import SelectedCoinsWindow from "../../NavArea/SelectedCoinsWindow/SelectedCoinsWindow";
-import SearchBar from "../../NavArea/SearchBar/SearchBar";
-import SelectNotification from "../../HomeArea/SelectNotification/SelectNotification";
 
-export const ScrollContext = createContext<number>(0);
+export const ScrollContext = createContext<number>(0); // Used for infinite scroll in Home.tsx
+export const PopupContext = createContext<boolean>(false); // Used for Coin Selection popup in SelectedCoinsWindow.tsx
 
 function Layout(): JSX.Element {
     console.log("Layout called", "Component Load Sequence");
