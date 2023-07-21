@@ -12,7 +12,8 @@
     position: absolute;
     padding: 5%;
     top: -70vh;
-    left: -20vw;
+    left: calc(250rem - 40vw);
+
 	opacity: 0;
     width: 75vw;
     height: 75vh;
