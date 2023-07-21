@@ -11,8 +11,8 @@ class CacheService {
     }
     // Stores data in the cache using the provided key and value
     // Data is stored inside an object containing "timestamp" - the time of storing and "content" - what we are storing
-    set(key: string, value: any): void {
-        const obj = { timestamp: new Date(), content: value };
+    set(key: string, value: any, timeoutOffset?: number): void {
+        const obj = { timestamp: new Date().getTime() - (timeoutOffset || 0), content: value };
         localStorage.setItem(key, JSON.stringify(obj));
     }
     // Validates data (for cache retrieval)

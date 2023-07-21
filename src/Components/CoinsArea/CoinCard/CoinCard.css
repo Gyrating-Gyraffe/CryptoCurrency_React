@@ -31,8 +31,8 @@
     /* animation: fadeIn .15s cubic-bezier(0.075, 0.82, 0.165, 1); */
 }
 
-.CartridgeFront,
-.CartridgeRear {
+.CoinCard .CartridgeFront,
+.CoinCard .CartridgeRear {
     background-image: url("../../../Assets/Images/cartridgeFront3.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -53,18 +53,18 @@
     /* animation: glow 1s alternate-reverse 2; */
 }
 
-.CartridgeRear img {
+.CoinCard .CartridgeRear img {
     margin: 0;
     height: 50rem;
     width: 50rem;
 }
 
-.CartridgeRear .LoadingMoreInfo {
+.CoinCard .CartridgeRear .LoadingMoreInfo {
     animation: opacityFadeIn 0.7s ease infinite alternate;
     color: var(--primary400);
 }
 
-.CartridgeRear .LoadingMoreInfoImage {
+.CoinCard .CartridgeRear .LoadingMoreInfoImage {
     animation: opacityFadeIn 0.7s ease infinite alternate;
     
     width: 40rem;
@@ -75,18 +75,18 @@
     border-radius: 10rem;
 }
 
-.form-switch {
+.CoinCard .form-switch {
     transition: all 0.2s linear;
     flex-basis: 10%;
 }
 
 
-.form-switch {
+.CoinCard .form-switch {
     flex-basis: 20%;
     width: 193rem;
 }
 
-.card-title {
+.CoinCard .card-title {
     margin: 0 0 0 53rem;
     width: 95rem;
     line-height: 55rem;
@@ -96,11 +96,11 @@
     white-space: nowrap;
 }
 
-.CartridgeFront .card-text {
+.CoinCard .CartridgeFront .card-text {
     font-size: 30rem;
 }
 
-.card-text {
+.CoinCard .card-text {
     flex-basis: 60%;
     font-size: 23rem;
     max-width: 166rem;
@@ -109,14 +109,14 @@
     overflow: hidden;
     margin: 0;
 }
-.CartridgeFront .card-text {
+.CoinCard .CartridgeFront .card-text {
     white-space: normal;
 }
-.CartridgeRear .card-text {
+.CoinCard .CartridgeRear .card-text {
     white-space: nowrap;
 }
 
-.more-info {
+.CoinCard .more-info {
     flex-basis: 15%;
     cursor: pointer;
 
@@ -132,7 +132,7 @@
 
 
 /* SELECT SWITCH */
-.switch {
+.CoinCard .switch {
     margin-top: 4rem;
     position: relative;
     display: inline-block;
@@ -142,14 +142,14 @@
 }
 
 /* Hide default HTML checkbox */
-.switch input {
+.CoinCard .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
 /* The slider */
-.slider {
+.CoinCard .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -162,7 +162,7 @@
     box-shadow: inset 0 0 4rem black;
 }
 
-.slider:before {
+.CoinCard .slider:before {
     position: absolute;
     content: "";
     height: 42rem;
@@ -175,47 +175,43 @@
     transition: .4s;
 }
 
-.slider:hover:before {
+.CoinCard .slider:hover:before {
     animation: shake .14s ease-out alternate 2;
 }
-.slider.good-color:hover {
+.CoinCard .slider.good-color:hover {
     background-color: var(--primary200);
 }
-.slider.bad-color:hover {
+.CoinCard .slider.bad-color:hover {
     background-color: var(--warn250);
 }
 
-input.good-color:checked+.slider {
+.CoinCard input.good-color:checked+.slider {
     background-color: var(--secondary300);
     box-shadow: inset 0 0 6rem black;
     color: var(--primary100);
 }
-input.bad-color:checked+.slider {
+.CoinCard input.bad-color:checked+.slider {
     background-color: var(--warn400);
     box-shadow: inset 0 0 6rem black;
     color: var(--primary100);
 }
 
-input:focus+.slider {
-    
-}
-
-input:checked+.slider:before {
+.CoinCard input:checked+.slider:before {
     -webkit-transform: translateX(134rem);
     -ms-transform: translateX(134rem);
     transform: translateX(134rem);
 }
 
 /* Rounded sliders */
-.slider.round {
+.CoinCard .slider.round {
     border-radius: 28rem;
 }
 
-.slider-text {
+.CoinCard .slider-text {
     
 }
 
-.slider.round:before {
+.CoinCard .slider.round:before {
     border-radius: 50%;
 }
 

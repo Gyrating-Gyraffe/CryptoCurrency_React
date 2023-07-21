@@ -1,16 +1,12 @@
-1. In Services/ChartService add typing to the coin apiData received for the chart.
-2. Continue working on ChartService logic and design.
-3. Add strong typing to ApiService promise return type.
+//1. In Services/ChartService add typing to the coin apiData received for the chart.
+//2. Continue working on ChartService logic and design.
+//3. Add strong typing to ApiService promise return type.
 4. Add live report validation - if no coins are selected we don't display the chart and instead display
     a warning to the user. Consider all possibilities - Clicking the nav button, using the route url.
-5. Add thumbnail to Coin Card "more info".
-6. Some coins pulled from CoinGecko don't have live pricing in CryptoCompare. Decide on handling - 
+//6. Some coins pulled from CoinGecko don't have live pricing in CryptoCompare. Decide on handling - 
     Ignoring selection input or removing the button completely for these coins.
 7. Consider adding a feature to ChartService that checks which selected coins have info and which don't. 
     And shows the ones that do while hiding the ones that don't.
-8. Add 404 Image not Found for the "more info" part of the coin.
-9. Decide whether the coin selection should be kept after exiting the Live Report page or reset. 
-    Currently on exiting the Live Report page the selection is kept in Chart Service but not on the coins' buttons.
-10. On entering about page delete selected coins
+
 11. Check if canvasjs has responsive sizing.
-12. Title and favicon
+//12. *** Infinite scroll not working in Mobile version

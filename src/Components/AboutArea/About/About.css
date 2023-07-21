@@ -1,3 +1,54 @@
+@keyframes aboutGrow {
+	0% {scale: 0.01; opacity: 0;}
+	100% {scale: 1; opacity: 1;}
+}
+
+@keyframes aboutTextAppear {
+	0% {translate: 0 -20%; opacity: 0;}
+	100% {translate: 0 0; opacity: 1;}
+}
+
+
 .About {
-	font-size: 20rem;
+	display: flex;
+	flex-flow: row wrap;
+
+	height: 94vh;
+	width: 100%;
+
+	justify-content: center;
+	
+	align-items: center;
+
+	font-size: 30rem;
+
+	font-family: Arial, Helvetica, sans-serif;
+	color: var(--primary100);
+	background-color: rgba(0, 3, 31, 0.644);
+}
+
+.About .AboutPhoto {
+	width: 500rem;
+	height: 500rem;
+
+	margin: auto;
+}
+
+.About .TextContainer {
+	animation: aboutTextAppear 0.6s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+	margin: auto;
+	width: 600rem;
+	text-align: left;
+}
+
+.About .AboutPhoto img {
+	animation: aboutGrow 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+	width: 100%;
+	border-radius: 400rem;
+}
+
+.About .MainText {
+	font-size: 24rem;
+	color: var(--primary300);
 }

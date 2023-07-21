@@ -7,7 +7,7 @@
     font-size: 20rem;
     color: var(--primary100);
 }
-.NavLinkWrapper {
+.Nav .NavLinkWrapper {
     margin: 12.8rem 0 0 0;
     display: flex;
     flex-flow: row nowrap;
@@ -54,11 +54,11 @@
     }
 }
 
-.NavGroup {
+.Nav .NavGroup {
     flex-basis: 35%;
 
 }
-.NavLinkWrapper {
+.Nav .NavLinkWrapper {
     margin: 12.8rem 0 0 0;
     display: flex;
     flex-flow: row nowrap;
@@ -66,31 +66,31 @@
     font-size: 26.4rem;
 }
 
-.NavTitle {
+.Nav .NavTitle {
     margin: 0 0 16rem 0;
     color: var(--primary300);
 }
 
-.NavLinkWrapper > img {
+.Nav .NavLinkWrapper > img {
     margin: auto;
     margin-left: 0;
     height: 19.2rem;
 }
 
-.NavLink {
+.Nav .NavLink {
     margin: 0;
     text-decoration: none;
     color: var(--primary300);
 
     transition: color 0.2s ease-out;
 }
-.NavLink:hover {
+.Nav .NavLink:hover {
     color: var(--primary100);
 }
-.NavLink.active {
+.Nav .NavLink.active {
     color: var(--secondary300);
 }
 
-.NavLink.Unavailable {
+.Nav .NavLink.Unavailable {
     color: var(--warn300);
 }

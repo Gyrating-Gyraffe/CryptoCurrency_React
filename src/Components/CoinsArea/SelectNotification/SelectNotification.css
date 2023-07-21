@@ -1,16 +1,12 @@
-@keyframes enter {
+@keyframes selectNotifEnter {
     0% {top: 100vh; border-radius: 50rem; height: 250rem; opacity: 0;}
     100% {top: calc(86vh - 50rem); border-radius: 100rem; height: 120rem; opacity: 1;}
 }
-/* @keyframes exit {
-    0% {top: calc(90vh - 100rem); border-radius: 35rem; height: 100rem}
-    100% {top: 100vh; border-radius: 0; height: 300rem;}
-} */
-@keyframes exit {
+
+@keyframes selectNotifExit {
     0% {opacity: 1; top: calc(86vh - 50rem); border-radius: 100rem; height: 120rem;}
     100% {opacity: 0; top: calc(86vh - 50rem); border-radius: 100rem; height: 120rem;}
 }
-
 
 
 .SelectNotification {
@@ -26,21 +22,19 @@
 
     z-index: 4;
 
-
 	background: var(--warn400);
-    background: linear-gradient(120deg, var(--warn300) 05%, var(--warn400) 58%);
-    box-shadow: 0 0 30rem black;
-    box-shadow: inset 0 0 0;
-    border: rgb(16, 24, 39) 1rem solid;
+    background: linear-gradient(120deg, var(--warn300) 05%, var(--warn500) 58%);
+    box-shadow: inset 0 0 15rem rgba(0, 0, 0, 0.436);
+    border: var(--warn400) 7rem solid;
 
-    color: rgb(209, 209, 209);
+    color: var(--primary100);
 
     text-align: left;
 
     transition: all 0.4s;
 }
 .SelectNotification:hover {
-    box-shadow: inset 0 0 10rem var(--warn200);
+    filter: contrast(1.2);
 }
 
 .SelectNotification .error-content {
@@ -85,12 +79,14 @@
     transform: translate(-10rem, -15rem) rotate(0deg);
     height: 70rem;
     width: 70rem;
+    border: var(--warn200) 2rem solid;
+    border-radius: 100rem;
 }
 
 .SelectNotification.animate-enter {
-    animation: enter 0.5s cubic-bezier(0.175, 0.885, 0.72, 1) forwards;
+    animation: selectNotifEnter 0.5s cubic-bezier(0.175, 0.885, 0.72, 1) forwards;
 }
 
 .SelectNotification.animate-exit {
-    animation: exit 0.15s ease-in forwards;
+    animation: selectNotifExit 0.15s ease-in forwards;
 }

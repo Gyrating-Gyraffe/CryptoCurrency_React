@@ -25,7 +25,7 @@ type GroupedLog = {
 class Logger {
     constructor(private logArray: GroupedLog[] = [],
         private keySet: Set<string> = new Set<string>()) {
-        setInterval(() => this.groupLogs(), 2000);
+        setInterval(() => this.groupLogs(), 7000);
     }
 
     /** Logs a regular log message on the console.

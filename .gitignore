@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/src/Services/SyncedCoinListService.ts
 
 # production
 /build

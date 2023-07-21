@@ -20,21 +20,11 @@ function CoinCard(props: CoinCardProps): JSX.Element {
     const [selectedCoinsArr, setSelectedCoinsArr] = useState<CoinModel[]>([]);
     const [coinInfo, setCoinInfo] = useState<CoinInfoModel>();
     const [showInfo, setShowInfo] = useState<boolean>(false);
-    const [liveDataExists, setLiveDataExists] = useState<boolean>(false);
     const [isSelected, setIsSelected] = useState<boolean>(false);
 
     // Classes controlling slider/selection button styling
     const selectButtonClasses: string = `form-check-input coin-select ${selectedCoinsArr.length > 5 ? "bad-color" : "good-color"}`;
     const sliderClasses: string = `slider round ${selectedCoinsArr.length > 4 ? "bad-color" : "good-color"}`;
-
-    // Check if live data exists for this coin in CryptoCompare
-    useEffect(() => {
-        (async () => {
-            if (props.coin.symbol)
-                // setLiveDataExists(await chartService.checkLiveData(props.coin.symbol));
-                setLiveDataExists(true);
-        })();
-    }, []);
 
     // EFFECTS
     useEffect(fetchMoreInfo, [showInfo]);   // Loads additional info when "More Info" button is pressed
@@ -91,11 +81,10 @@ function CoinCard(props: CoinCardProps): JSX.Element {
             {!showInfo
                 && <div className="CartridgeFront">
                     <div className="form-check form-switch">
-                        {liveDataExists &&
-                            <label className="switch">
-                                <input className={selectButtonClasses} type="checkbox" onChange={toggleSelect} checked={isSelected} />
-                                <span className={sliderClasses}><div className="slider-text card-title">{props.coin.symbol}</div></span>
-                            </label>}
+                        {<label className="switch">
+                            <input className={selectButtonClasses} type="checkbox" onChange={toggleSelect} checked={isSelected} />
+                            <span className={sliderClasses}><div className="slider-text card-title">{props.coin.symbol}</div></span>
+                        </label>}
 
                     </div>
                     <p className="card-text">{props.coin.name}</p>
@@ -107,11 +96,10 @@ function CoinCard(props: CoinCardProps): JSX.Element {
 
                 || <div className="CartridgeRear">
                     <div className="form-check form-switch">
-                        {liveDataExists &&
-                            <label className="switch">
-                                <input className={selectButtonClasses} type="checkbox" onChange={toggleSelect} checked={isSelected} />
-                                <span className={sliderClasses}><div className="slider-text card-title">{props.coin.symbol}</div></span>
-                            </label>}
+                        {<label className="switch">
+                            <input className={selectButtonClasses} type="checkbox" onChange={toggleSelect} checked={isSelected} />
+                            <span className={sliderClasses}><div className="slider-text card-title">{props.coin.symbol}</div></span>
+                        </label>}
                     </div>
                     <span className="card-text">
                         {props.coin.name}

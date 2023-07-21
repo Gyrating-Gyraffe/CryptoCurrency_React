@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react";
+import coinLoadImage from "../../../Assets/Images/coin_loading_2.svg";
+import noCoinsFoundImage from "../../../Assets/Images/no_coins_found.png";
 import CoinModel from "../../../Models/CoinModel";
 import { searchStore } from "../../../Redux/SearchStates";
 import { dataService } from "../../../Services/DataService";
 import { appConfig } from "../../../Utils/AppConfig";
 import CoinCard from "../../CoinsArea/CoinCard/CoinCard";
 import { ScrollContext } from "../../LayoutArea/Layout/Layout";
-import noCoinsFoundImage from "../../../Assets/Images/no_coins_found.png";
-import coinLoadImage from "../../../Assets/Images/coin_loading_2.svg";
 import "./Home.css";
+import { syncedCoinListService } from "../../../Services/SyncedCoinListService";
 
 export function Home(): JSX.Element {
     console.log("Home called", "Component Load Sequence");
@@ -65,8 +66,8 @@ export function Home(): JSX.Element {
         return array.filter((coin: CoinModel) => { return searchString ? coin.symbol!.startsWith(searchString) : true })
                 .sort((a: CoinModel, b: CoinModel) => { return searchString ? (a.symbol!.startsWith(b.symbol!) ? 0 : -1) : 0 }); 
     }
-    function filterExclusiveByID(array: CoinModel[], searchString: string): CoinModel[] {
-        return array.filter((coin: CoinModel) => { return coin.id === searchString });
+    function filterExclusiveByID(array: CoinModel[], searchString: string): CoinModel[] { 
+        return array.filter((coin: CoinModel) => { return coin.id === searchString }); 
     }
     function filterBySymbolLength(array: CoinModel[], maxLength: number): CoinModel[] {
         return array.filter((coin: CoinModel) => { return coin.symbol ? coin.symbol.length <= maxLength : false });
@@ -110,7 +111,6 @@ export function Home(): JSX.Element {
             <div className="TextContainer">
                 <h1 className="HomeTitle">Good Morning</h1>
                 <h3 className="HomeDescription">Let's play the market!</h3>
-               
             </div>
 
             <div className="CardContainer">
