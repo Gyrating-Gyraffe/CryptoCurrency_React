@@ -8,7 +8,6 @@ import { appConfig } from "../../../Utils/AppConfig";
 import CoinCard from "../../CoinsArea/CoinCard/CoinCard";
 import { ScrollContext } from "../../LayoutArea/Layout/Layout";
 import "./Home.css";
-import { syncedCoinListService } from "../../../Services/SyncedCoinListService";
 
 export function Home(): JSX.Element {
     console.log("Home called", "Component Load Sequence");
@@ -63,7 +62,7 @@ export function Home(): JSX.Element {
         setFilteredCoins(filtered);
     };
     function filterInclusiveBySymbol(array: CoinModel[], searchString: string): CoinModel[] {
-        return array.filter((coin: CoinModel) => { return searchString ? coin.symbol!.startsWith(searchString) : true })
+        return array.filter((coin: CoinModel) => { return searchString ? coin.symbol!.startsWith(searchString.toLowerCase()) : true })
                 .sort((a: CoinModel, b: CoinModel) => { return searchString ? (a.symbol!.startsWith(b.symbol!) ? 0 : -1) : 0 }); 
     }
     function filterExclusiveByID(array: CoinModel[], searchString: string): CoinModel[] { 
